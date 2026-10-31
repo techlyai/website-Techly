@@ -1,0 +1,1150 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>TECHLY AI × SI Master Class</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: bright "AI lab" — light canvas with a live neural network and prompt demo in the hero, fee ticket, card grids, 3-step admission console, admin view on #admin */
+:root{
+  --bg:#f6f7ff; --bg2:#eef0fc; --panel:#ffffff; --panel2:#f4f1ff; --line:#dfe3f5;
+  --fg:#0f172a; --muted:#545c86; --dim:#8088ad;
+  --blue:#0ea5e9; --cyan:#0284c7; --violet:#6366f1; --magenta:#4f46e5;
+  --sky:#0ea5e9; --indigo:#6366f1; --navy:#0f172a;
+  --brand:"Poppins", "Segoe UI", system-ui, sans-serif;
+  --ok:#12a575; --warn:#c77a00; --bad:#e23d5f;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Manrope", "Segoe UI", system-ui, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+  --r:14px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+a{color:var(--blue)}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);line-height:1.1;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h2{font-size:clamp(28px,4.2vw,44px);font-weight:800}
+p{margin:0}
+.eyebrow{font:700 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--violet)}
+.lead{color:var(--muted);max-width:62ch}
+.grad{background:linear-gradient(92deg,var(--cyan),var(--blue) 45%,var(--magenta));-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:14px 26px;font:700 15px/1 var(--body);cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .2s,background .2s}
+.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+.btn-primary{background:linear-gradient(95deg,var(--cyan),var(--violet));color:#fff;box-shadow:0 10px 26px -10px rgba(47,107,255,.65)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 32px -10px rgba(124,77,255,.7)}
+.btn-ghost{background:var(--panel);color:var(--fg);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--blue)}
+.btn-sm{padding:9px 14px;font-size:13px}
+.btn[disabled]{opacity:.5;cursor:not-allowed;transform:none}
+
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(246,247,255,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--bg)}
+nav.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.mark{display:block;flex:none}
+.wordmark{font:600 22px/1 var(--brand);letter-spacing:0;color:var(--navy)}
+.wordmark span{color:var(--indigo)}
+.logo-stack{display:flex;flex-direction:column;align-items:center;gap:14px}
+.logo-mark{width:30px;height:30px;border-radius:9px;background:conic-gradient(from 210deg,var(--cyan),var(--blue),var(--violet),var(--magenta),var(--cyan));display:grid;place-items:center;font:800 14px var(--mono);color:#fff;animation:spin-hue 8s linear infinite}
+@keyframes spin-hue{to{filter:hue-rotate(360deg)}}
+.nav-links{display:flex;gap:22px;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none;font-weight:600;font-size:14px}
+.nav-links a:hover{color:var(--fg)}
+.nav-links a.btn{color:#fff}
+@media (max-width:820px){.nav-links a.hide-m{display:none}}
+
+/* hero */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line);background:radial-gradient(760px 420px at 85% 0%,rgba(124,77,255,.14),transparent 70%),radial-gradient(620px 420px at 0% 100%,rgba(14,159,194,.12),transparent 70%),var(--bg)}
+#net{position:absolute;inset:0;width:100%;height:100%}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.25fr .9fr;gap:48px;align-items:center;padding-block:64px 72px}
+.hero h1{font-size:clamp(44px,7.4vw,92px);font-weight:800;letter-spacing:-.03em}
+.hero h1 .x{font-family:var(--mono);font-weight:500;color:var(--magenta);-webkit-text-fill-color:var(--magenta);font-size:.7em;vertical-align:.12em;margin:0 .06em}
+.hero .sub{font:600 clamp(18px,2.2vw,22px)/1.4 var(--display);margin-top:14px}
+.hero .lead{margin-top:14px}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+
+/* AI prompt demo */
+.ai-demo{margin-top:28px;background:rgba(255,255,255,.88);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:16px;padding:14px 16px;max-width:520px;box-shadow:0 18px 40px -26px rgba(47,107,255,.5)}
+.ai-bar{display:flex;align-items:center;gap:8px;font:700 11px var(--mono);letter-spacing:.1em;color:var(--dim);text-transform:uppercase}
+.ai-bar .live{display:inline-flex;align-items:center;gap:6px;color:var(--ok);margin-left:auto}
+.ai-bar .live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok);animation:blink 1.4s ease-in-out infinite}
+@keyframes blink{50%{opacity:.25}}
+.ai-line{display:flex;align-items:center;gap:10px;margin-top:12px;min-height:30px;flex-wrap:wrap}
+.ai-tool{font:700 12px var(--mono);color:#fff;background:linear-gradient(95deg,var(--cyan),var(--violet));padding:6px 10px;border-radius:8px;white-space:nowrap}
+.ai-prompt{font:500 15px var(--mono);color:var(--fg);min-width:0;flex:1}
+.ai-prompt::after{content:"▍";color:var(--violet);animation:blink 1s steps(1) infinite}
+.ai-out{margin-top:10px;height:34px;border-radius:10px;background:var(--bg2);position:relative;overflow:hidden;display:flex;align-items:center;padding:0 12px;font:700 13px var(--mono);color:var(--ok)}
+.ai-out .bar{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,rgba(47,107,255,.18),rgba(192,38,211,.2));transition:width 1.4s cubic-bezier(.4,0,.2,1)}
+.ai-out .shine{position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.8) 50%,transparent 70%);transform:translateX(-100%)}
+.ai-out.working .shine{animation:shine 1.1s linear infinite}
+@keyframes shine{to{transform:translateX(100%)}}
+.ai-out span{position:relative}
+
+.ticket{position:relative;background:var(--panel);border-radius:22px;padding:28px;box-shadow:0 30px 70px -34px rgba(14,165,233,.6)}
+.ticket::before{content:"";position:absolute;inset:-2px;border-radius:24px;z-index:-1;background:conic-gradient(from var(--a,0deg),var(--cyan),var(--blue),var(--violet),var(--magenta),var(--cyan));animation:rot 6s linear infinite}
+@property --a{syntax:"<angle>";inherits:false;initial-value:0deg}
+@keyframes rot{to{--a:360deg}}
+.ticket-in{position:relative}
+.ticket .tag{display:inline-block;font:700 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--fg);padding:7px 10px;border-radius:6px}
+.price{font:800 clamp(64px,9vw,92px)/1 var(--display);margin-top:16px;letter-spacing:-.04em}
+.price small{font:600 16px var(--body);color:var(--muted);letter-spacing:0;margin-left:6px}
+.ticket dl{display:grid;grid-template-columns:auto 1fr;gap:10px 18px;margin:22px 0 0;padding-top:20px;border-top:1px dashed var(--line);font-size:14px}
+.ticket dt{color:var(--dim);font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.08em;padding-top:2px}
+.ticket dd{margin:0;font-weight:600}
+.ticket .btn{width:100%;margin-top:24px}
+.ticket .note{font-size:12px;color:var(--dim);margin-top:12px;text-align:center}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr;padding-block:44px 52px;gap:36px}}
+
+section.block{padding-block:84px}
+.sec-head{display:flex;flex-direction:column;gap:12px;margin-bottom:40px}
+
+.hl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.hl{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:flex;gap:16px;align-items:flex-start;transition:border-color .2s,transform .2s,box-shadow .2s}
+.hl:hover{border-color:var(--blue);transform:translateY(-3px);box-shadow:0 16px 30px -22px rgba(47,107,255,.6)}
+.hl .ic{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(140deg,rgba(47,107,255,.12),rgba(124,77,255,.16));color:var(--blue)}
+.hl .ic svg{width:22px;height:22px}
+.hl h3{font-size:18px;font-weight:700}
+.hl p{color:var(--muted);font-size:14px;margin-top:4px}
+.hl.feat{background:linear-gradient(140deg,#eef2ff,#f7edff);border-color:var(--violet)}
+@media (max-width:900px){.hl-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.hl-grid{grid-template-columns:1fr}}
+
+.about{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.about p+p{margin-top:14px}
+.who{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.who div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-weight:600;font-size:15px}
+.who span{display:block;font:500 11px var(--mono);color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+@media (max-width:820px){.about{grid-template-columns:1fr}}
+
+.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.tool{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 16px 16px 58px;min-height:64px;display:flex;align-items:center;font-weight:600;font-size:15px;transition:border-color .2s,box-shadow .2s}
+.tool:hover{border-color:var(--violet);box-shadow:0 0 0 4px rgba(124,77,255,.1)}
+.tool b{position:absolute;left:14px;top:50%;transform:translateY(-50%);font:700 13px var(--mono);color:var(--cyan);width:32px;height:32px;border-radius:8px;display:grid;place-items:center;background:rgba(14,159,194,.08);border:1px solid rgba(14,159,194,.3)}
+.tool.named b{color:var(--magenta);background:rgba(192,38,211,.07);border-color:rgba(192,38,211,.3)}
+.tool.lit{border-color:var(--violet);box-shadow:0 0 0 4px rgba(124,77,255,.12)}
+.tools-key{display:flex;gap:18px;flex-wrap:wrap;margin-top:16px;font-size:13px;color:var(--muted)}
+.tools-key i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+@media (max-width:900px){.tools{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.tools{grid-template-columns:1fr}}
+
+.cert-band{background:linear-gradient(120deg,#eaf0ff,#f4ecff);border-block:1px solid var(--line)}
+.cert{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:center}
+.cert-card{position:relative;aspect-ratio:1.414;max-width:100%;background:#fff;color:#141a3a;border-radius:10px;padding:7%;box-shadow:0 34px 60px -30px rgba(18,23,53,.45);transform:rotate(-2deg);overflow:hidden}
+.cert-card::before{content:"";position:absolute;inset:12px;border:2px solid #3d4ab8;border-radius:6px;pointer-events:none}
+.cert-card::after{content:"";position:absolute;inset:18px;border:1px solid #c6cbf3;border-radius:4px;pointer-events:none}
+.cert-card .c-brand{font:800 clamp(11px,1.4vw,14px) var(--display);letter-spacing:.3em;color:#3d4ab8}
+.cert-card .c-title{font:800 clamp(18px,2.6vw,30px)/1.05 var(--display);margin-top:6%}
+.cert-card .c-small{font-size:clamp(9px,1.1vw,12px);color:#5a6290;margin-top:4%}
+.cert-card .c-name{font:700 clamp(16px,2.2vw,26px) var(--display);margin-top:2%;border-bottom:1px solid #c6cbf3;padding-bottom:2%;display:inline-block;color:#6a3fd8}
+.cert-card .c-foot{position:absolute;left:7%;right:7%;bottom:9%;display:flex;justify-content:space-between;align-items:flex-end;font:500 clamp(8px,1vw,11px) var(--mono);color:#5a6290}
+.seal{width:clamp(44px,7vw,70px);height:clamp(44px,7vw,70px);border-radius:50%;background:conic-gradient(var(--blue),var(--violet),var(--magenta),var(--blue));display:grid;place-items:center;color:#fff;font:800 clamp(8px,1vw,11px) var(--mono);text-align:center;line-height:1.1}
+.cert ul{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:12px}
+.cert li{display:flex;gap:12px;align-items:flex-start;color:var(--muted)}
+.cert li svg{flex:none;width:20px;height:20px;color:var(--ok);margin-top:3px}
+@media (max-width:860px){.cert{grid-template-columns:1fr}.cert-card{transform:none}}
+
+.apply{display:grid;grid-template-columns:.8fr 1.6fr;gap:32px;align-items:start}
+.side{position:sticky;top:90px;display:grid;gap:16px}
+@media (max-width:900px){.apply{grid-template-columns:1fr}.side{position:static}}
+.feebox{background:var(--panel);border:1px solid var(--violet);border-radius:var(--r);padding:22px}
+.feebox .amt{font:800 48px/1 var(--display);margin-top:8px}
+.feebox ul{margin:14px 0 0;padding-left:18px;color:var(--muted);font-size:14px;display:grid;gap:6px}
+.feebox .batch{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);font-size:14px}
+.feebox .batch b{display:block;font:800 20px var(--display)}
+.warnbox{border:1px solid #f3cf8c;background:#fff6e4;border-radius:var(--r);padding:16px 18px;font-size:14px;color:#6b4200;display:flex;gap:12px}
+.warnbox svg{flex:none;width:20px;height:20px;color:var(--warn);margin-top:2px}
+.console{background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden;min-width:0;box-shadow:0 24px 50px -36px rgba(18,23,53,.35)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line);background:var(--bg2)}
+.step{padding:16px 18px;display:flex;gap:10px;align-items:center;font-weight:700;font-size:14px;color:var(--dim);border-right:1px solid var(--line)}
+.step:last-child{border-right:0}
+.step b{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font:700 12px var(--mono);border:1px solid var(--line);background:var(--panel);flex:none}
+.step.on{color:var(--fg);background:var(--panel)}
+.step.on b{background:var(--cyan);border-color:var(--cyan);color:#fff}
+.step.done{color:var(--muted)}
+.step.done b{background:var(--ok);border-color:var(--ok);color:#fff}
+@media (max-width:560px){.step span{display:none}.step{justify-content:center}}
+.pane{padding:28px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px 18px}
+.full{grid-column:1/-1}
+@media (max-width:620px){.grid2{grid-template-columns:1fr}.pane{padding:20px}}
+.f label{display:block;font-weight:700;font-size:13px;margin-bottom:6px}
+.f label .opt{font-weight:500;color:var(--dim)}
+.f label .req{color:var(--magenta)}
+.f .hint{font-size:12px;color:var(--dim);margin-top:5px}
+input[type=text],input[type=tel],input[type=email],input[type=number],input[type=date],select,textarea{width:100%;background:var(--panel);border:1px solid var(--line);color:var(--fg);border-radius:10px;padding:12px 14px;font:500 15px var(--body);transition:border-color .2s,box-shadow .2s}
+input:hover,select:hover,textarea:hover{border-color:#b9c1e8}
+input:focus,select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(47,107,255,.15);outline:none}
+textarea{resize:vertical;min-height:84px}
+.f.err input,.f.err select,.f.err textarea{border-color:var(--bad)}
+.f .msg{display:none;color:var(--bad);font-size:12px;margin-top:5px}
+.f.err .msg{display:block}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg label{margin:0;cursor:pointer}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg span{display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);font-weight:600;font-size:14px}
+.seg input:checked+span{border-color:var(--blue);background:rgba(47,107,255,.1);color:var(--blue)}
+.seg input:focus-visible+span{outline:2px solid var(--violet);outline-offset:2px}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--muted);cursor:pointer}
+.check input{margin-top:4px;width:18px;height:18px;accent-color:var(--blue);flex:none}
+.actions{display:flex;justify-content:space-between;gap:12px;margin-top:26px;flex-wrap:wrap}
+
+.pay{display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:start}
+@media (max-width:620px){.pay{grid-template-columns:1fr}}
+.qr{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;place-items:center;aspect-ratio:1;max-width:220px;width:100%}
+.qr img,.qr canvas{width:100%!important;height:auto!important}
+.qr.empty{background:var(--bg2);border-style:dashed;color:var(--dim);text-align:center;font-size:13px;padding:20px}
+.upi-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.upi-row code{font:700 15px var(--mono);color:var(--blue);word-break:break-all;flex:1;min-width:0}
+.pay-amt{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px dashed var(--line);padding-bottom:12px;margin-bottom:14px}
+.pay-amt strong{font:800 30px var(--display)}
+.drop{border:1px dashed #b9c1e8;border-radius:12px;padding:16px;text-align:center;color:var(--muted);font-size:14px;cursor:pointer;background:var(--bg2);display:block}
+.drop:hover{border-color:var(--blue)}
+.drop input{display:none}
+.drop img{max-height:120px;margin:10px auto 0;border-radius:8px;display:block}
+
+.review{display:grid;grid-template-columns:auto 1fr;gap:8px 18px;font-size:14px;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:18px}
+.review dt{color:var(--dim);font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;padding-top:2px}
+.review dd{margin:0;font-weight:600;word-break:break-word;min-width:0}
+
+.success{text-align:center;padding:40px 28px}
+.success .tick{width:72px;height:72px;border-radius:50%;margin:0 auto;background:rgba(18,165,117,.1);border:1px solid var(--ok);display:grid;place-items:center;color:var(--ok)}
+.success .tick svg{width:36px;height:36px}
+.idbox{display:inline-block;margin-top:18px;padding:14px 22px;border-radius:12px;background:var(--bg2);border:1px solid var(--blue);font:700 clamp(20px,4vw,28px) var(--mono);letter-spacing:.06em;color:var(--blue)}
+.status-pill{display:inline-flex;align-items:center;gap:6px;font:700 12px var(--mono);padding:6px 10px;border-radius:999px;letter-spacing:.04em;white-space:nowrap}
+.status-pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.st-pending{color:var(--warn);background:#fff3dc}
+.st-verified,.st-confirmed{color:var(--ok);background:#e3f7ef}
+.st-rejected,.st-cancelled{color:var(--bad);background:#fde7ec}
+.st-submitted{color:var(--blue);background:#e8eeff}
+.preview-note{margin-top:16px;font-size:13px;color:var(--warn)}
+
+.final{position:relative;overflow:hidden;text-align:center;padding-block:96px;border-top:1px solid var(--line);background:radial-gradient(700px 360px at 50% 0%,rgba(124,77,255,.16),transparent 70%),var(--bg)}
+#net2{position:absolute;inset:0;width:100%;height:100%}
+.final .wrap{position:relative}
+.final h2{font-size:clamp(36px,6.4vw,72px)}
+.final .lead{margin:18px auto 0}
+.final .tagline{font:700 18px var(--display);margin-top:10px}
+.final .fee{font:700 16px var(--mono);color:var(--blue);margin-top:24px}
+.final .btn{margin-top:22px;padding:18px 40px;font-size:17px}
+.final .limited{margin-top:18px;font-weight:700;color:var(--magenta);letter-spacing:.04em}
+.pulse{animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 10px 26px -10px rgba(47,107,255,.65)}50%{box-shadow:0 10px 40px -6px rgba(192,38,211,.6)}}
+footer{border-top:1px solid var(--line);padding-block:28px;color:var(--dim);font-size:13px;background:var(--panel)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.mbar{display:none}
+@media (max-width:720px){
+  .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;gap:12px;align-items:center;justify-content:space-between;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+  .mbar strong{font:800 22px var(--display)}
+  .mbar small{display:block;color:var(--muted);font-size:11px}
+  footer{padding-bottom:90px}
+}
+
+#admin-view{padding-block:36px 80px}
+.adm-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.adm-head h1{font-size:clamp(28px,4vw,40px)}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+.kpi .k{font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.kpi .v{font:800 34px/1.1 var(--display);margin-top:6px;font-variant-numeric:tabular-nums}
+.kpi.warn{border-color:#f3cf8c} .kpi.warn .v{color:var(--warn)}
+.kpi.ok .v{color:var(--ok)}
+.kpi .s{font-size:12px;color:var(--muted)}
+@media (max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.kpis .kpi:first-child{grid-column:1/-1}}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 14px;align-items:center}
+.toolbar input{flex:1 1 220px;min-width:0}
+.toolbar select{width:auto;flex:0 0 auto}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--panel)}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:1080px}
+th{text-align:left;font:700 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim);padding:12px 14px;border-bottom:1px solid var(--line);background:var(--bg2);white-space:nowrap}
+td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+tbody tr{cursor:pointer}
+tbody tr:hover{background:#f5f7ff}
+td .nm{font-weight:700}
+td .sm{color:var(--muted);font-size:12px}
+td code{font:600 12px var(--mono);color:var(--blue)}
+td.dt{white-space:nowrap;font-variant-numeric:tabular-nums}
+.empty-row td{text-align:center;color:var(--muted);padding:40px;cursor:default}
+.drawer-bg{position:fixed;inset:0;background:rgba(18,23,53,.35);z-index:40}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(520px,100%);background:var(--panel);border-left:1px solid var(--line);z-index:41;overflow-y:auto;padding:calc(24px + env(safe-area-inset-top,0px)) max(24px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) 24px;box-shadow:-20px 0 50px -30px rgba(18,23,53,.4)}
+.drawer h3{font-size:24px}
+.drawer .review{margin-top:16px}
+.drawer .shot{margin-top:14px}
+.drawer .shot img{border-radius:10px;border:1px solid var(--line)}
+.act-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.act-grid .btn{width:100%}
+.join-edit{display:flex;gap:10px;margin-top:10px}
+.join-edit input{flex:1;min-width:0}
+.btn-ok{background:var(--ok);color:#fff}
+.btn-bad{background:var(--panel);color:var(--bad);border:1px solid #f4b3c0}
+.settings{margin-top:28px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.settings summary{cursor:pointer;font-weight:700}
+.settings .grid2{margin-top:16px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--fg);color:#fff;padding:12px 18px;border-radius:12px;z-index:60;font-weight:600;font-size:14px;box-shadow:0 10px 30px rgba(18,23,53,.3)}
+.login-wrap{display:grid;place-items:center;min-height:70vh;padding-block:40px}
+.login-card{width:min(420px,100%);background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:32px;box-shadow:0 30px 60px -36px rgba(47,107,255,.5)}
+.login-err{color:var(--bad);font-size:13px;margin-top:12px}
+.me-chip{font:700 12px var(--mono);padding:8px 12px;border-radius:999px;background:var(--bg2);border:1px solid var(--line);color:var(--fg)}
+.users-tbl{min-width:640px}
+.users-tbl tbody tr{cursor:default}
+.users-tbl td .acts{display:flex;gap:6px;flex-wrap:wrap}
+.users-tbl input{padding:7px 10px;font-size:13px;width:150px}
+.role-badge{font:700 11px var(--mono);padding:4px 8px;border-radius:6px;background:#eee8ff;color:var(--violet)}
+.role-badge.admin{background:#e8eeff;color:var(--blue)}
+.example-tag{font:700 11px var(--mono);color:var(--warn);border:1px solid #f3cf8c;background:#fff6e4;padding:4px 8px;border-radius:6px;letter-spacing:.06em}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><clipPath id="techly-clip"><circle cx="40" cy="40" r="40"/></clipPath><symbol id="techly-mark" viewBox="0 0 123 80"><circle cx="40" cy="40" r="40" fill="#0EA5E9"/><circle cx="82.5" cy="40" r="40" fill="#6366F1"/><circle cx="82.5" cy="40" r="40" fill="#FFFFFF" clip-path="url(#techly-clip)"/></symbol></defs></svg>
+<nav class="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Techly home"><svg class="mark" width="45" height="29" viewBox="0 0 123 80" aria-hidden="true"><use href="#techly-mark"/></svg><span class="wordmark">Tech<span>ly</span></span></a>
+    <div class="nav-links">
+      <a class="hide-m" href="#highlights">Highlights</a>
+      <a class="hide-m" href="#tools">20 AI Tools</a>
+      <a class="hide-m" href="#certificate">Certificate</a>
+      <a id="admin-link" href="#admin" hidden>Admin</a>
+      <a class="btn btn-primary btn-sm" href="#apply">Apply Now</a>
+    </div>
+  </div>
+</nav>
+
+<main id="site-view">
+<header class="hero" id="top">
+  <canvas id="net" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">TECHLY presents · 20-Day Program</p>
+      <h1 style="margin-top:16px"><span class="grad">AI<span class="x">×</span>SI</span><br>Master Class</h1>
+      <p class="sub">Artificial Intelligence × Smart Innovation. Learn 20 AI tools in 20 days.</p>
+      <p class="lead">A practical, hands-on program for content creation, image and video generation, coding, automation, research and business growth. No advanced technical knowledge needed.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="#apply">Apply Now →</a>
+        <a class="btn btn-ghost" href="#tools">See the 20 tools</a>
+      </div>
+      <div class="ai-demo" aria-label="Examples of what you'll do with AI tools">
+        <div class="ai-bar"><span>What you'll do in class</span><span class="live">Live</span></div>
+        <div class="ai-line"><span class="ai-tool" id="aiTool">ChatGPT</span><span class="ai-prompt" id="aiPrompt">Write 5 Instagram captions for my bakery</span></div>
+        <div class="ai-out" id="aiOut"><div class="bar"></div><div class="shine"></div><span id="aiRes">✓ 5 captions ready</span></div>
+      </div>
+    </div>
+    <aside class="ticket" aria-label="Admission fee">
+      <div class="ticket-in">
+        <span class="tag">Admission Open</span>
+        <div class="price">₹999<small>/- only</small></div>
+        <p style="color:var(--muted);margin-top:6px">One-time payment per person. Full course, no hidden fees.</p>
+        <dl>
+          <dt id="batchDt" hidden>Joining</dt><dd id="batchDd" hidden></dd>
+          <dt>Duration</dt><dd>20 Days</dd>
+          <dt>Mode</dt><dd>Online &amp; Offline</dd>
+          <dt>Tools</dt><dd>20 AI tools, hands-on</dd>
+          <dt>Certificate</dt><dd>On successful completion</dd>
+        </dl>
+        <a class="btn btn-primary pulse" href="#apply">Pay &amp; Register</a>
+        <p class="note">Limited admissions per batch</p>
+      </div>
+    </aside>
+  </div>
+</header>
+
+<section class="block" id="highlights">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Why join</p>
+      <h2>Everything you get for <span class="grad">₹999</span></h2>
+    </div>
+    <div class="hl-grid" id="hl-grid"></div>
+  </div>
+</section>
+
+<section class="block" style="padding-top:0">
+  <div class="wrap about">
+    <div>
+      <p class="eyebrow">About the course</p>
+      <h2 style="margin-top:12px">Welcome to TECHLY AI × SI Master Class</h2>
+    </div>
+    <div>
+      <p class="lead">Join our 20-day practical training program and explore the power of Artificial Intelligence and Smart Innovation.</p>
+      <p class="lead">You will learn how to use 20 different AI tools for content creation, image generation, video creation, coding, automation, productivity, research and business development.</p>
+      <p style="margin-top:22px;font-weight:700">Who can apply</p>
+      <div class="who" style="margin-top:12px">
+        <div><span>01</span>Beginners</div>
+        <div><span>02</span>Students</div>
+        <div><span>03</span>Entrepreneurs</div>
+        <div><span>04</span>Freelancers</div>
+        <div><span>05</span>Working professionals</div>
+        <div><span>06</span>Business owners</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="tools" style="background:var(--bg2);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Curriculum</p>
+      <h2>20 AI tools you'll learn to use</h2>
+      <p class="lead">Ten named platforms plus ten tool categories, so you leave knowing both the leaders and how to choose alternatives.</p>
+    </div>
+    <div class="tools" id="tools-grid"></div>
+    <div class="tools-key"><span><i style="background:var(--magenta)"></i>Named platform</span><span><i style="background:var(--cyan)"></i>Tool category</span></div>
+  </div>
+</section>
+
+<section class="block cert-band" id="certificate">
+  <div class="wrap cert">
+    <div class="cert-card" aria-label="Sample certificate">
+      <div class="c-brand" style="display:flex;align-items:center;gap:8px"><svg width="34" height="22" viewBox="0 0 123 80" aria-hidden="true"><use href="#techly-mark"/></svg><span class="wordmark" style="font-size:clamp(13px,1.6vw,17px)">Tech<span>ly</span></span></div>
+      <div class="c-title">Certificate of<br>Completion</div>
+      <div class="c-small">This is to certify that</div>
+      <div class="c-name">Your Name Here</div>
+      <div class="c-small">has successfully completed the 20-day AI × SI Master Class, covering 20 AI tools.</div>
+      <div class="c-foot"><span>Admission ID<br>TAI-XXXXXX</span><div class="seal">AI×SI<br>20 DAYS</div><span style="text-align:right">Director<br>TECHLY</span></div>
+    </div>
+    <div>
+      <p class="eyebrow">Certification</p>
+      <h2 style="margin-top:12px">Get Your Course Completion Certificate!</h2>
+      <p class="lead" style="margin-top:14px">Every participant who successfully completes the 20-day AI × SI Master Class will receive a certificate from TECHLY.</p>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Issued in your name with your Admission ID</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Add it to your resume and LinkedIn profile</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Included in the ₹999 fee</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="apply">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Admission form</p>
+      <h2>Apply in 3 simple steps</h2>
+    </div>
+    <div class="apply">
+      <div class="side">
+        <div class="feebox">
+          <p class="eyebrow">Admission fee</p>
+          <div class="amt">₹999/- <span style="font-size:18px;color:var(--muted)">only</span></div>
+          <ul>
+            <li>Full course fee paid in advance</li>
+            <li>Payment is mandatory to confirm admission</li>
+            <li>One-time payment of ₹999 per participant</li>
+          </ul>
+          <div class="batch" id="sideBatch" hidden><span style="color:var(--dim)">Next batch joining date</span><b id="sideBatchDate"></b></div>
+        </div>
+        <div class="warnbox">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/></svg>
+          <p>Your admission will be confirmed only after successful payment verification. Please complete the ₹999 payment before submitting your registration.</p>
+        </div>
+      </div>
+
+      <div class="console" id="console">
+        <div class="steps" id="steps">
+          <div class="step on" data-s="1"><b>1</b><span>Your details</span></div>
+          <div class="step" data-s="2"><b>2</b><span>Payment</span></div>
+          <div class="step" data-s="3"><b>3</b><span>Review &amp; submit</span></div>
+        </div>
+        <form id="form" novalidate>
+          <div class="pane" data-pane="1">
+            <div class="grid2">
+              <div class="f full"><label for="fullName">Full Name <span class="req">*</span></label><input type="text" id="fullName" autocomplete="name" placeholder="As it should appear on your certificate"><div class="msg">Enter your full name.</div></div>
+              <div class="f"><label for="mobile">Mobile Number <span class="req">*</span></label><input type="tel" id="mobile" inputmode="numeric" maxlength="10" autocomplete="tel-national" placeholder="10-digit number"><div class="msg">Enter a valid 10-digit mobile number.</div></div>
+              <div class="f"><label for="whatsapp">WhatsApp Number <span class="req">*</span></label><input type="tel" id="whatsapp" inputmode="numeric" maxlength="10" placeholder="10-digit number"><div class="msg">Enter a valid 10-digit WhatsApp number.</div>
+                <label class="check" style="margin-top:8px;font-weight:500"><input type="checkbox" id="sameWa"> Same as mobile number</label></div>
+              <div class="f"><label for="email">Email Address <span class="req">*</span></label><input type="email" id="email" autocomplete="email" placeholder="you@example.com"><div class="msg">Enter a valid email address.</div></div>
+              <div class="f"><label for="age">Age <span class="req">*</span></label><input type="number" id="age" min="12" max="80" inputmode="numeric" placeholder="e.g. 22"><div class="msg">Enter an age between 12 and 80.</div></div>
+              <div class="f full"><label>Gender <span class="req">*</span></label>
+                <div class="seg" id="gender">
+                  <label><input type="radio" name="gender" id="g-m" value="Male"><span>Male</span></label>
+                  <label><input type="radio" name="gender" id="g-f" value="Female"><span>Female</span></label>
+                  <label><input type="radio" name="gender" id="g-o" value="Other"><span>Other</span></label>
+                  <label><input type="radio" name="gender" id="g-n" value="Prefer not to say"><span>Prefer not to say</span></label>
+                </div><div class="msg">Select an option.</div></div>
+              <div class="f"><label for="city">City / District <span class="req">*</span></label><input type="text" id="city" placeholder="e.g. Madurai"><div class="msg">Enter your city or district.</div></div>
+              <div class="f"><label for="qualification">Educational Qualification <span class="req">*</span></label>
+                <select id="qualification"><option value="">Select</option><option>10th / SSLC</option><option>12th / HSC</option><option>Diploma</option><option>Undergraduate (UG)</option><option>Postgraduate (PG)</option><option>Doctorate / PhD</option><option>Other</option></select><div class="msg">Select your qualification.</div></div>
+              <div class="f full"><label for="org">College / Company Name <span class="opt">(optional)</span></label><input type="text" id="org"></div>
+              <div class="f full"><label>Current Profession <span class="req">*</span></label>
+                <div class="seg" id="profession">
+                  <label><input type="radio" name="profession" id="p-st" value="Student"><span>Student</span></label>
+                  <label><input type="radio" name="profession" id="p-wp" value="Working Professional"><span>Working Professional</span></label>
+                  <label><input type="radio" name="profession" id="p-bo" value="Business Owner"><span>Business Owner</span></label>
+                  <label><input type="radio" name="profession" id="p-fl" value="Freelancer"><span>Freelancer</span></label>
+                  <label><input type="radio" name="profession" id="p-ot" value="Other"><span>Other</span></label>
+                </div><div class="msg">Select your current profession.</div></div>
+              <div class="f"><label>Preferred Learning Mode <span class="req">*</span></label>
+                <div class="seg" id="mode">
+                  <label><input type="radio" name="mode" id="m-on" value="Online"><span>Online</span></label>
+                  <label><input type="radio" name="mode" id="m-off" value="Offline"><span>Offline</span></label>
+                </div><div class="msg">Choose online or offline.</div></div>
+              <div class="f"><label for="joiningDate">Joining Date <span class="req">*</span></label><input type="date" id="joiningDate"><div class="hint" id="joinHint">The date you want to start the course.</div><div class="msg">Choose a joining date from today onwards.</div></div>
+              <div class="f full"><label for="why">Why do you want to learn AI? <span class="opt">(optional)</span></label><textarea id="why" maxlength="600" placeholder="Tell us your goal, e.g. grow my business, get a better job, create content"></textarea></div>
+            </div>
+            <div class="actions"><span></span><button type="button" class="btn btn-primary" data-next="2">Continue to Payment →</button></div>
+          </div>
+
+          <div class="pane" data-pane="2" hidden>
+            <div class="pay">
+              <div>
+                <div class="qr empty" id="qr">QR code will appear here once TECHLY publishes its payment details.</div>
+                <p style="font-size:12px;color:var(--dim);margin-top:8px;text-align:center">Scan with GPay, PhonePe, Paytm or any UPI app</p>
+              </div>
+              <div>
+                <div class="pay-amt"><span style="color:var(--muted);font-weight:600">Amount to pay</span><strong>₹999.00</strong></div>
+                <p style="font-weight:700;font-size:13px;margin-bottom:6px">UPI ID</p>
+                <div class="upi-row"><code id="upiText">Not published yet</code><button type="button" class="btn btn-ghost btn-sm" id="copyUpi">Copy</button></div>
+                <p id="payee" style="font-size:13px;color:var(--muted);margin-top:6px"></p>
+                <a class="btn btn-ghost btn-sm" id="upiLink" href="#" style="margin-top:10px" hidden>Open UPI app</a>
+                <div class="warnbox" style="margin-top:16px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/></svg><p>Pay ₹999 first, then enter the Transaction ID / UTR below. Admission is confirmed only after verification.</p></div>
+              </div>
+            </div>
+            <div class="grid2" style="margin-top:22px">
+              <div class="f"><label for="utr">Transaction ID / UTR Number <span class="req">*</span></label><input type="text" id="utr" maxlength="30" placeholder="12-digit UTR or UPI reference" style="font-family:var(--mono)"><div class="msg">Enter the Transaction ID or 12-digit UTR from your payment app.</div></div>
+              <div class="f"><label for="paymentDate">Payment Date <span class="req">*</span></label><input type="date" id="paymentDate"><div class="msg">Enter the date you paid (not a future date).</div></div>
+              <div class="f full" id="shotField"><label>Payment Screenshot <span class="req" id="shotReq">*</span></label>
+                <label class="drop" for="shot"><input type="file" id="shot" accept="image/*"><span id="shotLabel">Tap to upload the payment success screenshot (JPG/PNG, max 5 MB)</span><img id="shotPrev" alt="" hidden></label>
+                <div class="msg">Upload your payment screenshot (image under 5 MB).</div></div>
+              <div class="f full"><label class="check"><input type="checkbox" id="paidConfirm"> I confirm I have paid ₹999 to TECHLY for the AI × SI Master Class, and the details above are correct.</label><div class="msg">Please confirm your payment.</div></div>
+            </div>
+            <div class="actions"><button type="button" class="btn btn-ghost" data-next="1">← Back</button><button type="button" class="btn btn-primary" data-next="3">Review Application →</button></div>
+          </div>
+
+          <div class="pane" data-pane="3" hidden>
+            <dl class="review" id="reviewList"></dl>
+            <div class="f" style="margin-top:18px"><label class="check"><input type="checkbox" id="agree"> I agree that TECHLY may contact me on phone, WhatsApp and email about this course.</label><div class="msg">Please accept to continue.</div></div>
+            <p id="submitErr" style="color:var(--bad);font-size:14px;margin-top:12px" hidden></p>
+            <div class="actions"><button type="button" class="btn btn-ghost" data-next="2">← Back</button><button type="submit" class="btn btn-primary" id="submitBtn">Pay &amp; Register ✓</button></div>
+          </div>
+        </form>
+        <div class="success" id="success" hidden></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <canvas id="net2" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <p class="eyebrow">Admissions open</p>
+    <h2 style="margin-top:14px"><span class="grad">YOUR AI JOURNEY</span><br>STARTS HERE!</h2>
+    <p class="lead">Learn 20 powerful AI tools in just 20 days.</p>
+    <p class="tagline">Upgrade your skills. Explore AI. Build smarter.</p>
+    <p style="margin-top:22px;font:700 20px var(--display)">Join TECHLY AI × SI MASTER CLASS Today!</p>
+    <p class="fee">Course Fee: ₹999/- Only</p>
+    <a class="btn btn-primary pulse" href="#apply">APPLY NOW</a>
+    <p class="limited">Limited Admissions – Register Now!</p>
+  </div>
+</section>
+</main>
+
+<main id="admin-view" hidden>
+  <div class="wrap login-wrap" id="loginView" hidden>
+    <form class="login-card" id="loginForm" novalidate>
+      <div class="logo-stack"><svg class="mark" width="74" height="48" viewBox="0 0 123 80" aria-hidden="true"><use href="#techly-mark"/></svg><span class="wordmark" style="font-size:28px">Tech<span>ly</span></span></div>
+      <p class="eyebrow" style="margin-top:18px">TECHLY · Admin</p>
+      <h1 style="font-size:30px;margin-top:8px">Sign in to admissions</h1>
+      <div class="f" style="margin-top:22px"><label for="lgUser">Username</label><input type="text" id="lgUser" autocomplete="username" autocapitalize="off"></div>
+      <div class="f" style="margin-top:14px"><label for="lgPass">Password</label><input type="password" id="lgPass" autocomplete="current-password"></div>
+      <p class="login-err" id="lgErr" hidden></p>
+      <button class="btn btn-primary" type="submit" id="lgBtn" style="width:100%;margin-top:20px">Sign in</button>
+      <p style="font-size:12px;color:var(--dim);margin-top:14px;text-align:center">Forgot your password? Ask an Owner to reset it in Admin users.</p>
+      <a href="#top" style="display:block;text-align:center;font-size:13px;margin-top:8px">← Back to course page</a>
+    </form>
+  </div>
+  <div class="wrap" id="adminMain" hidden>
+    <div class="adm-head">
+      <div>
+        <p class="eyebrow">TECHLY · Admin</p>
+        <h1 style="margin-top:8px">AI × SI Admissions</h1>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <span class="example-tag" id="exampleTag" hidden>EXAMPLE DATA</span>
+        <span class="me-chip" id="meChip" hidden></span>
+        <button class="btn btn-ghost btn-sm" id="logoutBtn" type="button" hidden>Log out</button>
+        <button class="btn btn-primary btn-sm" id="exportBtn">Download Excel</button>
+        <a class="btn btn-ghost btn-sm" href="#top">View site</a>
+      </div>
+    </div>
+    <div class="kpis" id="kpis"></div>
+    <div class="toolbar">
+      <input type="text" id="q" placeholder="Search name, mobile, email, Admission ID, UTR">
+      <select id="fPay"><option value="">All payments</option><option value="pending">Pending verification</option><option value="verified">Verified</option><option value="rejected">Rejected</option></select>
+      <select id="fMode"><option value="">All modes</option><option>Online</option><option>Offline</option></select>
+      <select id="fStatus"><option value="">All admissions</option><option value="submitted">Submitted</option><option value="confirmed">Confirmed</option><option value="cancelled">Cancelled</option></select>
+      <select id="fJoin"><option value="">All joining dates</option></select>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Admission ID</th><th>Student</th><th>Contact</th><th>City</th><th>Profession</th><th>Mode</th><th>UTR</th><th>Payment date</th><th>Joining date</th><th>Payment</th><th>Admission</th><th>Applied</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <details class="settings" id="settings">
+      <summary>Payment, batch &amp; contact settings</summary>
+      <div class="grid2">
+        <div class="f"><label for="setUpi">UPI ID</label><input type="text" id="setUpi" placeholder="e.g. techly@okaxis"></div>
+        <div class="f"><label for="setPayee">Payee name</label><input type="text" id="setPayee" placeholder="e.g. TECHLY AI"></div>
+        <div class="f"><label for="setBatch">Next batch joining date</label><input type="date" id="setBatch"><div class="hint">Shown on the page and pre-filled for students.</div></div>
+        <div class="f"><label for="setWa">TECHLY WhatsApp number (for students)</label><input type="tel" id="setWa" maxlength="10" placeholder="10-digit number"></div>
+        <div class="f full"><button class="btn btn-primary btn-sm" id="saveSettings" type="button">Save settings</button></div>
+      </div>
+    </details>
+    <details class="settings" id="usersPanel">
+      <summary>Admin users</summary>
+      <div class="tbl-wrap" style="margin-top:16px">
+        <table class="users-tbl"><thead><tr><th>Username</th><th>Role</th><th>Status</th><th>Last login</th><th>Actions</th></tr></thead><tbody id="userRows"></tbody></table>
+      </div>
+      <p class="eyebrow" style="margin-top:22px">Add admin user</p>
+      <div class="grid2" style="margin-top:12px">
+        <div class="f"><label for="nuName">Username</label><input type="text" id="nuName" autocapitalize="off" placeholder="letters, numbers, . _ -"></div>
+        <div class="f"><label for="nuRole">Role</label><select id="nuRole"><option value="Admin">Admin – students &amp; payments</option><option value="Owner">Owner – also users &amp; settings</option></select></div>
+        <div class="f"><label for="nuPass">Password</label><input type="password" id="nuPass" autocomplete="new-password" placeholder="At least 8 characters"></div>
+        <div class="f" style="display:flex;align-items:flex-end"><button class="btn btn-primary btn-sm" id="nuAdd" type="button">Add user</button></div>
+      </div>
+      <p style="font-size:12px;color:var(--dim);margin-top:12px">Staff also need Editor access to this page from the Share menu. The username and password are the second lock on top of that.</p>
+    </details>
+    <details class="settings" id="myPass">
+      <summary>Change my password</summary>
+      <div class="grid2">
+        <div class="f"><label for="cpOld">Current password</label><input type="password" id="cpOld" autocomplete="current-password"></div>
+        <div class="f"><label for="cpNew">New password</label><input type="password" id="cpNew" autocomplete="new-password" placeholder="At least 8 characters"></div>
+        <div class="f full"><button class="btn btn-primary btn-sm" id="cpSave" type="button">Update password</button></div>
+      </div>
+    </details>
+  </div>
+</main>
+
+<div class="drawer-bg" id="drawerBg" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-label="Student details"></aside>
+
+<div class="mbar" id="mbar"><div><strong>₹999</strong><small>20 days · 20 AI tools</small></div><a class="btn btn-primary btn-sm" href="#apply">Apply Now</a></div>
+<footer><div class="wrap"><span style="display:flex;align-items:center;gap:10px"><svg class="mark" width="34" height="22" viewBox="0 0 123 80" aria-hidden="true"><use href="#techly-mark"/></svg><span class="wordmark" style="font-size:17px">Tech<span>ly</span></span><span>© 2026 · AI × SI Master Class</span></span><span>Admissions confirmed after payment verification</span></div></footer>
+<div class="toast" id="toast" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+(() => {
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const toast = (m) => { const t=$("#toast"); t.textContent=m; t.hidden=false; clearTimeout(toast._t); toast._t=setTimeout(()=>t.hidden=true,2600); };
+const copy = async (text) => { try { await navigator.clipboard.writeText(text); toast("Copied"); } catch { toast("Select and copy: " + text.slice(0,40)); } };
+const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------- dates ---------- */
+const pad = n => String(n).padStart(2,"0");
+const ymd = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const TODAY = ymd(new Date());
+const fmtDay = s => { if (!s) return "—"; const [y,m,d] = s.split("-").map(Number); return new Date(y,m-1,d).toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"}); };
+const fmtDate = ts => { const d=new Date(ts); return `${fmtDay(ymd(d))}, ${d.toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit"})}`; };
+$("#joiningDate").min = TODAY;
+$("#paymentDate").max = TODAY; $("#paymentDate").value = TODAY;
+
+/* ---------- static content ---------- */
+const ic = {
+  cal:'<path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/>',
+  grid:'<path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/>',
+  wifi:'<path d="M5 12.5a10 10 0 0114 0M8.5 16a5 5 0 017 0M12 19.5h.01M2 9a15 15 0 0120 0"/>',
+  hand:'<path d="M9 11V5a2 2 0 014 0v6m0-3a2 2 0 014 0v5a7 7 0 01-7 7h-1a6 6 0 01-5-3l-2-3a2 2 0 013-2l2 2V8a2 2 0 012 0"/>',
+  seed:'<path d="M12 22V12m0 0C12 7 8 4 3 4c0 5 4 8 9 8zm0 0c0-5 4-8 9-8 0 5-4 8-9 8"/>',
+  globe:'<path d="M12 2a10 10 0 100 20 10 10 0 000-20zM2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/>',
+  brief:'<path d="M3 7h18v13H3zM8 7V5a2 2 0 012-2h4a2 2 0 012 2v2M3 13h18"/>',
+  award:'<path d="M12 15a6 6 0 100-12 6 6 0 000 12zM8.5 14l-1.5 8 5-3 5 3-1.5-8"/>',
+  rupee:'<path d="M6 3h12M6 8h12M6 13l9 8M6 13h3a5 5 0 000-10"/>'
+};
+const highlights = [
+  ["cal","20 Days of AI Training","A structured day-by-day program"],
+  ["grid","Learn 20 AI Tools","Leading platforms and tool categories"],
+  ["wifi","Online & Offline Classes","Choose the mode that suits you"],
+  ["hand","Practical Hands-on Learning","Build real outputs in every session"],
+  ["seed","Beginner-Friendly Training","No coding or tech background needed"],
+  ["globe","Real-World AI Applications","Use cases from work, study and business"],
+  ["brief","AI for Business & Productivity","Save hours and grow faster with AI"],
+  ["award","Course Completion Certificate","Issued by TECHLY on completion"],
+  ["rupee","Affordable Fee – Just ₹999","One-time payment, full course access"]
+];
+$("#hl-grid").innerHTML = highlights.map(([k,t,d],i) => `<div class="hl${i===8?' feat':''}"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ic[k]}</svg></div><div><h3>${t}</h3><p>${d}</p></div></div>`).join("");
+const tools = ["ChatGPT (GPT)","Claude AI","Google Gemini","Lovable AI","ElevenLabs","Nano Banana","Google Flow","Google Antigravity","Perplexity AI","Microsoft Copilot","AI Image Generation Tools","AI Video Generation Tools","AI Website Development Tools","AI Coding Assistants","AI Voice Generation Tools","AI Presentation Tools","AI Automation Tools","AI Research Tools","AI Content Creation Tools","AI Productivity Tools"];
+$("#tools-grid").innerHTML = tools.map((t,i)=>`<div class="tool${i<10?' named':''}" data-i="${i}"><b>${String(i+1).padStart(2,"0")}</b>${t}</div>`).join("");
+
+/* ---------- neural network canvases (pulses travel along links) ---------- */
+function neural(canvas, density){
+  const x = canvas.getContext("2d"); let W,H,pts=[],sig=[],raf;
+  const size = () => { const r=canvas.getBoundingClientRect(), d=Math.min(devicePixelRatio||1,2); W=r.width; H=r.height; canvas.width=W*d; canvas.height=H*d; x.setTransform(d,0,0,d,0,0);
+    const n=Math.round(Math.min(64, W*H/density)); pts=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,r:1.4+Math.random()*1.8})); sig=[]; };
+  const links = () => { const L=[]; for (let i=0;i<pts.length;i++) for (let j=i+1;j<pts.length;j++){ const a=pts[i],b=pts[j],d=Math.hypot(a.x-b.x,a.y-b.y); if(d<140) L.push([a,b,d]); } return L; };
+  const draw = () => { x.clearRect(0,0,W,H);
+    if(!still) for (const p of pts){ p.x+=p.vx; p.y+=p.vy; if(p.x<0||p.x>W)p.vx*=-1; if(p.y<0||p.y>H)p.vy*=-1; }
+    const L = links();
+    for (const [a,b,d] of L){ x.strokeStyle=`rgba(99,102,241,${(1-d/140)*.3})`; x.lineWidth=1; x.beginPath(); x.moveTo(a.x,a.y); x.lineTo(b.x,b.y); x.stroke(); }
+    for (const p of pts){ x.fillStyle="rgba(14,165,233,.6)"; x.beginPath(); x.arc(p.x,p.y,p.r,0,7); x.fill(); }
+    if (!still) {
+      if (L.length && sig.length < 14 && Math.random() < .12) { const [a,b]=L[Math.random()*L.length|0]; sig.push(Math.random()<.5?{a,b,t:0}:{a:b,b:a,t:0}); }
+      sig = sig.filter(s => (s.t += .018) < 1);
+      for (const s of sig){ const px=s.a.x+(s.b.x-s.a.x)*s.t, py=s.a.y+(s.b.y-s.a.y)*s.t;
+        const g=x.createRadialGradient(px,py,0,px,py,10); g.addColorStop(0,"rgba(99,102,241,.95)"); g.addColorStop(1,"rgba(99,102,241,0)");
+        x.fillStyle=g; x.beginPath(); x.arc(px,py,10,0,7); x.fill();
+        x.fillStyle="#fff"; x.beginPath(); x.arc(px,py,1.8,0,7); x.fill(); }
+      raf=requestAnimationFrame(draw);
+    } };
+  size(); draw(); addEventListener("resize",()=>{cancelAnimationFrame(raf);size();draw();});
+}
+neural($("#net"), 15000);
+neural($("#net2"), 20000);
+
+/* ---------- AI prompt demo ---------- */
+(() => {
+  const demos = [
+    ["ChatGPT","Write 5 Instagram captions for my bakery","✓ 5 captions ready",0],
+    ["Nano Banana","Design a Diwali sale poster for my shop","✓ Poster generated",5],
+    ["ElevenLabs","Tamil voice-over for my 30s ad","✓ Audio ready · 0:30",4],
+    ["Lovable AI","Build a booking website for my salon","✓ Website live",3],
+    ["Google Flow","Make a 10s product video","✓ Video rendered · 1080p",6],
+    ["Perplexity AI","Research AI trends in retail","✓ 12 sources summarised",8],
+    ["Claude AI","Turn my notes into a business plan","✓ 6-page plan drafted",1]
+  ];
+  const tool=$("#aiTool"), pr=$("#aiPrompt"), out=$("#aiOut"), res=$("#aiRes"), bar=out.querySelector(".bar");
+  if (still) return;
+  let k = 0;
+  const sleep = ms => new Promise(r=>setTimeout(r,ms));
+  const lit = i => { $$(".tool.lit").forEach(t=>t.classList.remove("lit")); const t=document.querySelector(`.tool[data-i="${i}"]`); if(t) t.classList.add("lit"); };
+  (async function loop(){
+    for(;;){
+      const [t,p,r,i] = demos[k++ % demos.length];
+      tool.textContent = t; pr.textContent = ""; res.textContent = ""; bar.style.transition="none"; bar.style.width="0"; lit(i);
+      for (const ch of p){ pr.textContent += ch; await sleep(38); }
+      await sleep(250);
+      out.classList.add("working"); res.textContent = "Generating…"; res.style.color = "var(--violet)";
+      void bar.offsetWidth; bar.style.transition = ""; bar.style.width = "100%";
+      await sleep(1500);
+      out.classList.remove("working"); res.textContent = r; res.style.color = "";
+      await sleep(2200);
+    }
+  })();
+})();
+
+/* ---------- state & capabilities ---------- */
+let db=null, user=null, assets=null, downloads=null, uid=null, isAdmin=false;
+let config = {};
+let apps = [];
+let usingExample = false;
+const FEE = 999;
+const newId = () => { const d=new Date(); const r=Math.random().toString(36).slice(2,6).toUpperCase(); return `TAI-${String(d.getFullYear()).slice(2)}${pad(d.getMonth()+1)}-${r}`; };
+
+/* ---------- form steps ---------- */
+let step = 1;
+const radio = n => (document.querySelector(`input[name="${n}"]:checked`)||{}).value || "";
+const val = id => $("#"+id).value.trim();
+const setErr = (el, bad) => { const f = el.closest(".f"); if (f) f.classList.toggle("err", bad); return !bad; };
+const phoneOk = v => /^[6-9]\d{9}$/.test(v);
+
+$("#sameWa").addEventListener("change", e => { if (e.target.checked) $("#whatsapp").value = val("mobile"); });
+$("#mobile").addEventListener("input", () => { if ($("#sameWa").checked) $("#whatsapp").value = val("mobile"); });
+["mobile","whatsapp","setWa"].forEach(id => $("#"+id).addEventListener("input", e => e.target.value = e.target.value.replace(/\D/g,"").slice(0,10)));
+$$("#form input, #form select, #form textarea").forEach(el => el.addEventListener("input", () => el.closest(".f")?.classList.remove("err")));
+$$("#form input[type=radio], #form input[type=checkbox]").forEach(el => el.addEventListener("change", () => el.closest(".f")?.classList.remove("err")));
+
+function validate1(){
+  let ok = true, first=null;
+  const chk = (el, bad) => { if(!setErr(el,bad)){ ok=false; first=first||el; } };
+  chk($("#fullName"), val("fullName").length < 3);
+  chk($("#mobile"), !phoneOk(val("mobile")));
+  chk($("#whatsapp"), !phoneOk(val("whatsapp")));
+  chk($("#email"), !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val("email")));
+  const a = +val("age"); chk($("#age"), !(a>=12 && a<=80));
+  chk($("#gender"), !radio("gender"));
+  chk($("#city"), val("city").length < 2);
+  chk($("#qualification"), !val("qualification"));
+  chk($("#profession"), !radio("profession"));
+  chk($("#mode"), !radio("mode"));
+  chk($("#joiningDate"), !val("joiningDate") || val("joiningDate") < TODAY);
+  if (first) first.scrollIntoView({behavior:"smooth",block:"center"});
+  return ok;
+}
+let shotFile = null;
+function validate2(){
+  let ok = true;
+  if(!setErr($("#utr"), !/^[A-Za-z0-9]{6,30}$/.test(val("utr")))) ok=false;
+  if(!setErr($("#paymentDate"), !val("paymentDate") || val("paymentDate") > TODAY)) ok=false;
+  if (assets && !shotFile){ setErr($("#shot"), true); ok=false; }
+  if(!setErr($("#paidConfirm"), !$("#paidConfirm").checked)) ok=false;
+  return ok;
+}
+function go(n){
+  if (n > step) { if (step===1 && !validate1()) return; if (step===2 && n>=3 && !validate2()) return; }
+  step = n;
+  $$(".pane").forEach(p => p.hidden = +p.dataset.pane !== n);
+  $$(".step").forEach(s => { const k=+s.dataset.s; s.classList.toggle("on",k===n); s.classList.toggle("done",k<n); });
+  if (n===3) renderReview();
+  $("#console").scrollIntoView({behavior:"smooth",block:"start"});
+}
+$$("[data-next]").forEach(b => b.addEventListener("click", () => go(+b.dataset.next)));
+
+function collect(){
+  return { fullName:val("fullName"), mobile:val("mobile"), whatsapp:val("whatsapp"), email:val("email").toLowerCase(), age:+val("age"),
+    gender:radio("gender"), city:val("city"), qualification:val("qualification"), org:val("org"), profession:radio("profession"),
+    mode:radio("mode"), joiningDate:val("joiningDate"), why:val("why"), utr:val("utr").toUpperCase(), paymentDate:val("paymentDate"),
+    paidConfirm:$("#paidConfirm").checked, fee:FEE };
+}
+const LABELS = [["fullName","Name"],["mobile","Mobile"],["whatsapp","WhatsApp"],["email","Email"],["age","Age"],["gender","Gender"],["city","City / District"],["qualification","Qualification"],["org","College / Company"],["profession","Profession"],["mode","Learning mode"],["joiningDate","Joining date",fmtDay],["why","Why AI"],["utr","Transaction / UTR"],["paymentDate","Payment date",fmtDay]];
+const cell = (d,[k,,f]) => esc((f ? f(d[k]) : d[k]) || "—");
+function renderReview(){
+  const d = collect();
+  $("#reviewList").innerHTML = LABELS.map(L => `<dt>${L[1]}</dt><dd>${cell(d,L)}</dd>`).join("") + `<dt>Fee</dt><dd>₹999 (one-time)</dd><dt>Screenshot</dt><dd>${shotFile?esc(shotFile.name):(assets?"—":"Not required here")}</dd>`;
+}
+
+$("#shot").addEventListener("change", e => {
+  const f = e.target.files[0];
+  if (!f) return;
+  if (!f.type.startsWith("image/") || f.size > 5*1024*1024){ shotFile=null; setErr($("#shot"),true); return; }
+  shotFile = f; setErr($("#shot"),false);
+  $("#shotLabel").textContent = f.name + " · tap to change";
+  const p = $("#shotPrev"); p.src = URL.createObjectURL(f); p.hidden = false;
+});
+
+/* ---------- submit ---------- */
+$("#form").addEventListener("submit", async e => {
+  e.preventDefault();
+  if (!setErr($("#agree"), !$("#agree").checked)) return;
+  const btn = $("#submitBtn"); btn.disabled = true; btn.textContent = "Submitting…";
+  $("#submitErr").hidden = true;
+  const data = collect();
+  data.admissionId = newId(); data.createdAt = Date.now();
+  data.paymentStatus = "pending"; data.admissionStatus = "submitted";
+  let saved = false;
+  try {
+    if (db && uid) {
+      if (assets && shotFile) { const up = await assets.upload(shotFile); data.screenshotId = up.id; data.screenshotUrl = up.url; }
+      data.uid = uid;
+      await db.doc("applications/" + uid).set(data);
+      saved = true;
+    }
+  } catch (err) {
+    btn.disabled = false; btn.textContent = "Pay & Register ✓";
+    const m = $("#submitErr"); m.hidden = false;
+    m.textContent = err && err.code === "invalid_argument"
+      ? "Your access to this page can't save registrations. Please contact TECHLY to register."
+      : "Couldn't save your registration right now. Check your connection and try again.";
+    return;
+  }
+  showSuccess(data, !saved);
+});
+
+function detailsText(d){
+  return `TECHLY AI × SI Master Class – Registration\nAdmission ID: ${d.admissionId}\nName: ${d.fullName}\nMobile: ${d.mobile}\nEmail: ${d.email}\nMode: ${d.mode}\nJoining date: ${fmtDay(d.joiningDate)}\nFee: ₹999 paid on ${fmtDay(d.paymentDate)}\nUTR: ${d.utr}`;
+}
+const PILL = { pending:"Pending verification", verified:"Payment verified", rejected:"Payment rejected", submitted:"Submitted", confirmed:"Admission confirmed", cancelled:"Cancelled" };
+const pill = s => `<span class="status-pill st-${s}">${PILL[s]||s}</span>`;
+function showSuccess(d, preview){
+  $("#form").hidden = true; $("#steps").hidden = true;
+  const s = $("#success"); s.hidden = false;
+  const wa = config.whatsapp ? `https://wa.me/91${config.whatsapp}?text=${encodeURIComponent(detailsText(d))}` : "";
+  s.innerHTML = `
+    <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg></div>
+    <h3 style="font-size:28px;margin-top:18px">${d.admissionStatus==="confirmed"?"Admission confirmed!":"Registration received!"}</h3>
+    <p class="lead" style="margin:10px auto 0">Thank you, ${esc(d.fullName.split(" ")[0])}. Keep your Admission ID for all communication with TECHLY.</p>
+    <div class="idbox">${esc(d.admissionId)}</div>
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px">${pill(d.paymentStatus)}${pill(d.admissionStatus)}</div>
+    <p style="font-weight:700;margin-top:16px">Joining date: ${esc(fmtDay(d.joiningDate))}</p>
+    <p style="color:var(--muted);font-size:14px;margin-top:8px;max-width:52ch;margin-inline:auto">Our team will verify your ₹999 payment (UTR ${esc(d.utr)}, paid ${esc(fmtDay(d.paymentDate))}) and confirm your admission on WhatsApp ${esc(d.whatsapp)} and email ${esc(d.email)}. Come back to this page anytime to check your status.</p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px">
+      <button class="btn btn-ghost btn-sm" id="copyDetails" type="button">Copy registration details</button>
+      ${wa?`<a class="btn btn-primary btn-sm" href="${wa}" target="_blank" rel="noopener">Send to TECHLY on WhatsApp</a>`:""}
+    </div>
+    ${preview?`<p class="preview-note">Preview only: this registration was not saved, because saving isn't available in this view.</p>`:""}`;
+  $("#copyDetails").onclick = () => copy(detailsText(d));
+  $("#console").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+/* ---------- config: payment + batch ---------- */
+function renderConfig(){
+  const q = $("#qr");
+  if (config.upiId) {
+    const name = config.payee || "TECHLY";
+    const uri = `upi://pay?pa=${encodeURIComponent(config.upiId)}&pn=${encodeURIComponent(name)}&am=999.00&cu=INR&tn=${encodeURIComponent("AI x SI Master Class")}`;
+    q.className = "qr"; q.innerHTML = "";
+    if (window.QRCode) new QRCode(q, { text: uri, width: 200, height: 200, colorDark:"#121735", colorLight:"#ffffff", correctLevel: QRCode.CorrectLevel.M });
+    else q.textContent = "QR unavailable — pay using the UPI ID";
+    $("#upiText").textContent = config.upiId;
+    $("#payee").textContent = "Payee: " + name;
+    const l = $("#upiLink"); l.href = uri; l.hidden = false;
+  }
+  const b = config.batchStart;
+  const show = !!b && b >= TODAY;
+  $("#batchDt").hidden = $("#batchDd").hidden = $("#sideBatch").hidden = !show;
+  if (show) {
+    $("#batchDd").textContent = "Next batch " + fmtDay(b);
+    $("#sideBatchDate").textContent = fmtDay(b);
+    $("#joinHint").textContent = "Next batch starts " + fmtDay(b) + ". Change it if you prefer a later date.";
+    if (!$("#joiningDate").value) $("#joiningDate").value = b;
+  }
+}
+$("#copyUpi").onclick = () => config.upiId && copy(config.upiId);
+
+/* ---------- admin ---------- */
+const ago = days => ymd(new Date(Date.now()-days*86400e3));
+const EXAMPLES = [
+  {admissionId:"TAI-2610-K4P2",fullName:"Example: Priya S",mobile:"9876500011",whatsapp:"9876500011",email:"priya@example.com",age:21,gender:"Female",city:"Madurai",qualification:"Undergraduate (UG)",org:"Example College",profession:"Student",mode:"Online",joiningDate:ago(-10),why:"Content creation",utr:"431209876543",paymentDate:ago(0),paymentStatus:"pending",admissionStatus:"submitted",createdAt:Date.now()-3600e3},
+  {admissionId:"TAI-2610-9QX1",fullName:"Example: Arun K",mobile:"9876500022",whatsapp:"9876500022",email:"arun@example.com",age:34,gender:"Male",city:"Tiruchirappalli",qualification:"Postgraduate (PG)",org:"",profession:"Business Owner",mode:"Offline",joiningDate:ago(-10),why:"Automate my shop",utr:"431209876544",paymentDate:ago(1),paymentStatus:"verified",admissionStatus:"confirmed",createdAt:Date.now()-86400e3},
+  {admissionId:"TAI-2610-B7MZ",fullName:"Example: Meena R",mobile:"9876500033",whatsapp:"9876500033",email:"meena@example.com",age:27,gender:"Female",city:"Coimbatore",qualification:"Diploma",org:"Example Pvt Ltd",profession:"Working Professional",mode:"Online",joiningDate:ago(-24),why:"",utr:"431209876545",paymentDate:ago(2),paymentStatus:"verified",admissionStatus:"confirmed",createdAt:Date.now()-2*86400e3}
+];
+function renderAdmin(){
+  const tot=apps.length, paid=apps.filter(a=>a.paymentStatus==="verified").length, pend=apps.filter(a=>a.paymentStatus==="pending").length;
+  const on=apps.filter(a=>a.mode==="Online").length, off=apps.filter(a=>a.mode==="Offline").length;
+  $("#kpis").innerHTML = `
+    <div class="kpi"><div class="k">Total registrations</div><div class="v">${tot}</div><div class="s">₹${(paid*FEE).toLocaleString("en-IN")} verified collections</div></div>
+    <div class="kpi ok"><div class="k">Paid students</div><div class="v">${paid}</div></div>
+    <div class="kpi warn"><div class="k">Pending verification</div><div class="v">${pend}</div></div>
+    <div class="kpi"><div class="k">Online</div><div class="v">${on}</div></div>
+    <div class="kpi"><div class="k">Offline</div><div class="v">${off}</div></div>`;
+  const fj = $("#fJoin"), cur = fj.value;
+  const dates = [...new Set(apps.map(a=>a.joiningDate).filter(Boolean))].sort();
+  fj.innerHTML = `<option value="">All joining dates</option>` + dates.map(d=>`<option value="${d}">${fmtDay(d)} (${apps.filter(a=>a.joiningDate===d).length})</option>`).join("");
+  fj.value = dates.includes(cur) ? cur : "";
+  const list = filtered();
+  $("#rows").innerHTML = list.length ? list.map(a => `<tr data-id="${esc(a._id)}">
+    <td><code>${esc(a.admissionId)}</code></td>
+    <td><div class="nm">${esc(a.fullName)}</div><div class="sm">${esc(a.age)} · ${esc(a.gender)}</div></td>
+    <td><div>${esc(a.mobile)}</div><div class="sm">${esc(a.email)}</div></td>
+    <td>${esc(a.city)}</td><td>${esc(a.profession)}</td><td>${esc(a.mode)}</td>
+    <td><code>${esc(a.utr)}</code></td>
+    <td class="dt">${esc(fmtDay(a.paymentDate))}</td><td class="dt"><b>${esc(fmtDay(a.joiningDate))}</b></td>
+    <td>${pill(a.paymentStatus)}</td><td>${pill(a.admissionStatus)}</td>
+    <td class="sm dt">${fmtDate(a.createdAt)}</td></tr>`).join("")
+    : `<tr class="empty-row"><td colspan="12">${tot? "No students match these filters." : "No registrations yet. New applications appear here as soon as students submit the form."}</td></tr>`;
+  $$("#rows tr[data-id]").forEach(tr => tr.onclick = () => openDrawer(tr.dataset.id));
+}
+function filtered(){
+  const q=$("#q").value.trim().toLowerCase(), fp=$("#fPay").value, fm=$("#fMode").value, fs=$("#fStatus").value, fj=$("#fJoin").value;
+  return apps.filter(a => (!fp||a.paymentStatus===fp) && (!fm||a.mode===fm) && (!fs||a.admissionStatus===fs) && (!fj||a.joiningDate===fj) &&
+    (!q || [a.fullName,a.mobile,a.whatsapp,a.email,a.admissionId,a.utr,a.city].join(" ").toLowerCase().includes(q)))
+    .sort((a,b)=>b.createdAt-a.createdAt);
+}
+["q","fPay","fMode","fStatus","fJoin"].forEach(id => $("#"+id).addEventListener("input", renderAdmin));
+
+let openId = null;
+function closeDrawer(){ $("#drawer").hidden = true; $("#drawerBg").hidden = true; openId = null; }
+$("#drawerBg").onclick = closeDrawer;
+addEventListener("keydown", e => { if (e.key==="Escape") closeDrawer(); });
+function openDrawer(id){
+  const a = apps.find(x => x._id === id); if (!a) return;
+  openId = id;
+  const dr = $("#drawer");
+  const confirmMsg = `Hi ${a.fullName}, your admission to TECHLY AI × SI Master Class is confirmed. Admission ID: ${a.admissionId}. Payment of ₹999 (UTR ${a.utr}, paid ${fmtDay(a.paymentDate)}) verified. Your joining date is ${fmtDay(a.joiningDate)}. – TECHLY`;
+  const shot = a.screenshotId ? `/_blob/${a.screenshotId}` : (a.screenshotUrl||"");
+  dr.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+      <div><code style="font:700 14px var(--mono);color:var(--blue)">${esc(a.admissionId)}</code><h3 style="margin-top:6px">${esc(a.fullName)}</h3></div>
+      <button class="btn btn-ghost btn-sm" id="dClose" type="button">Close</button>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">${pill(a.paymentStatus)}${pill(a.admissionStatus)}</div>
+    <dl class="review">${LABELS.map(L=>`<dt>${L[1]}</dt><dd>${cell(a,L)}</dd>`).join("")}<dt>Applied</dt><dd>${fmtDate(a.createdAt)}</dd>${a.verifiedAt?`<dt>Verified</dt><dd>${fmtDate(a.verifiedAt)}${a.verifiedBy?` by ${esc(a.verifiedBy)}`:""}</dd>`:""}</dl>
+    <div class="shot">${shot?`<p style="font-weight:700;font-size:13px;margin-bottom:8px">Payment screenshot</p><a href="${esc(shot)}" target="_blank" rel="noopener"><img src="${esc(shot)}" alt="Payment screenshot from ${esc(a.fullName)}"></a>`:`<p style="color:var(--dim);font-size:13px">No screenshot attached.</p>`}</div>
+    <p class="eyebrow" style="margin-top:22px">Payment verification</p>
+    <div class="act-grid">
+      <button class="btn btn-ok btn-sm" data-act="verify" type="button">Verify payment &amp; confirm</button>
+      <button class="btn btn-bad btn-sm" data-act="reject" type="button">Reject payment</button>
+    </div>
+    <p class="eyebrow" style="margin-top:20px">Joining date</p>
+    <div class="join-edit"><input type="date" id="dJoin" value="${esc(a.joiningDate||"")}"><button class="btn btn-ghost btn-sm" id="dJoinSave" type="button">Update</button></div>
+    <p class="eyebrow" style="margin-top:20px">Admission status</p>
+    <div class="seg" style="margin-top:10px">${["submitted","confirmed","cancelled"].map(s=>`<label><input type="radio" name="adm" id="adm-${s}" value="${s}" ${a.admissionStatus===s?"checked":""}><span>${PILL[s]}</span></label>`).join("")}</div>
+    <p class="eyebrow" style="margin-top:22px">Notify student</p>
+    <div class="act-grid">
+      <a class="btn btn-primary btn-sm" target="_blank" rel="noopener" href="https://wa.me/91${esc(a.whatsapp)}?text=${encodeURIComponent(confirmMsg)}">WhatsApp confirmation</a>
+      <button class="btn btn-ghost btn-sm" id="copyMail" type="button">Copy email message</button>
+    </div>
+    <p style="font-size:12px;color:var(--dim);margin-top:8px">Email: ${esc(a.email)}</p>`;
+  dr.hidden = false; $("#drawerBg").hidden = false;
+  $("#dClose").onclick = closeDrawer;
+  $("#copyMail").onclick = () => copy(`To: ${a.email}\nSubject: Admission confirmed – TECHLY AI × SI Master Class (${a.admissionId})\n\n${confirmMsg}`);
+  const upd = async (patch, msg) => {
+    if (usingExample || !db) { Object.assign(a, patch); renderAdmin(); openDrawer(id); toast(msg + " (example only)"); return; }
+    try { await db.doc("applications/" + a._id).update(patch); toast(msg); } catch { toast("Couldn't update. Try again."); }
+  };
+  dr.querySelector('[data-act="verify"]').onclick = () => upd({paymentStatus:"verified", admissionStatus:"confirmed", verifiedAt:Date.now(), verifiedBy: me?.username || ""}, "Payment verified, admission confirmed");
+  dr.querySelector('[data-act="reject"]').onclick = () => upd({paymentStatus:"rejected"}, "Payment marked rejected");
+  $("#dJoinSave").onclick = () => { const v=$("#dJoin").value; if(!v){ toast("Pick a joining date"); return; } upd({joiningDate:v}, "Joining date updated to " + fmtDay(v)); };
+  dr.querySelectorAll('input[name="adm"]').forEach(r => r.onchange = () => upd({admissionStatus:r.value}, "Admission status updated"));
+}
+
+async function loadXLSX(){
+  if (window.XLSX) return window.XLSX;
+  await new Promise((res,rej) => { const s=document.createElement("script"); s.src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"; s.onload=res; s.onerror=rej; document.head.appendChild(s); });
+  return window.XLSX;
+}
+$("#exportBtn").onclick = async () => {
+  const list = filtered();
+  if (!list.length) { toast("No students to export"); return; }
+  if (!downloads) { toast("Download isn't available in this view"); return; }
+  try {
+    const X = await loadXLSX();
+    const rows = list.map(a => ({"Admission ID":a.admissionId,"Full Name":a.fullName,"Mobile":a.mobile,"WhatsApp":a.whatsapp,"Email":a.email,"Age":a.age,"Gender":a.gender,"City / District":a.city,"Qualification":a.qualification,"College / Company":a.org,"Profession":a.profession,"Learning Mode":a.mode,"Joining Date":fmtDay(a.joiningDate),"Why AI":a.why,"Fee (₹)":FEE,"UTR / Transaction ID":a.utr,"Payment Date":fmtDay(a.paymentDate),"Payment Status":PILL[a.paymentStatus],"Admission Status":PILL[a.admissionStatus],"Applied On":fmtDate(a.createdAt)}));
+    const ws = X.utils.json_to_sheet(rows); ws["!cols"] = Object.keys(rows[0]).map(k=>({wch:Math.max(13,k.length+2)}));
+    const wb = X.utils.book_new(); X.utils.book_append_sheet(wb, ws, "Students");
+    const buf = X.write(wb, {bookType:"xlsx", type:"array"});
+    await downloads.save({ filename:`TECHLY-AIxSI-students-${TODAY}.xlsx`, data:new Blob([buf],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}) });
+  } catch (e) { if (e && e.code !== "cancelled" && e.code !== "declined") toast("Couldn't create the Excel file"); }
+};
+
+$("#saveSettings").onclick = async () => {
+  const c = { upiId:$("#setUpi").value.trim(), payee:$("#setPayee").value.trim(), whatsapp:$("#setWa").value.trim(), batchStart:$("#setBatch").value };
+  if (c.whatsapp && !phoneOk(c.whatsapp)) { toast("Enter a valid 10-digit WhatsApp number"); return; }
+  if (!db) { toast("Saving isn't available in this view"); return; }
+  try { await db.doc("config/payment").set(c); toast("Settings saved"); } catch { toast("Couldn't save settings"); }
+};
+
+/* ---------- admin login & users ---------- */
+let adminUsers = [], usersLoaded = false, me = null, fails = 0, lockUntil = 0;
+const SKEY = "techly_admin_session";
+const hex = buf => [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join("");
+const hashPw = async (salt, pw) => hex(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(salt + ":" + pw)));
+const newSalt = () => hex(crypto.getRandomValues(new Uint8Array(16)));
+const uname = s => s.trim().toLowerCase();
+const isOwnerRole = () => me && me.role === "Owner";
+const sGet = () => { try { return sessionStorage.getItem(SKEY); } catch { return null; } };
+const sSet = v => { try { v ? sessionStorage.setItem(SKEY, v) : sessionStorage.removeItem(SKEY); } catch {} };
+
+function restoreSession(){
+  if (me || !usersLoaded) return;
+  const s = sGet(); if (!s) return;
+  const u = adminUsers.find(x => x._id === s && x.active !== false);
+  if (u) me = u; else sSet(null);
+}
+$("#loginForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const err = $("#lgErr"); err.hidden = true;
+  if (Date.now() < lockUntil) { err.hidden=false; err.textContent = `Too many attempts. Try again in ${Math.ceil((lockUntil-Date.now())/1000)} seconds.`; return; }
+  if (!usersLoaded) { err.hidden=false; err.textContent = "Still loading admin users. Try again in a moment."; return; }
+  const u = adminUsers.find(x => x._id === uname($("#lgUser").value));
+  const ok = u && u.active !== false && (await hashPw(u.salt, $("#lgPass").value)) === u.hash;
+  if (!ok) {
+    fails++; if (fails >= 5) { lockUntil = Date.now() + 30000; fails = 0; }
+    err.hidden=false; err.textContent = u && u.active === false ? "This account is disabled. Ask an Owner to enable it." : "Wrong username or password.";
+    return;
+  }
+  fails = 0; me = u; sSet(u._id); $("#lgPass").value = "";
+  try { await db.doc("admins/" + u._id).update({ lastLogin: Date.now() }); } catch {}
+  route();
+});
+$("#logoutBtn").onclick = () => { me = null; sSet(null); closeDrawer(); route(); toast("Logged out"); };
+
+function renderUsers(){
+  const owner = isOwnerRole();
+  $("#usersPanel").hidden = !owner; $("#settings").hidden = !owner;
+  $("#meChip").hidden = !me; $("#logoutBtn").hidden = !me;
+  if (me) $("#meChip").textContent = `${me.username} · ${me.role}`;
+  if (!owner) return;
+  const owners = adminUsers.filter(u => u.role === "Owner" && u.active !== false);
+  $("#userRows").innerHTML = adminUsers.slice().sort((a,b)=>a._id.localeCompare(b._id)).map(u => {
+    const self = me && u._id === me._id, lastOwner = u.role==="Owner" && u.active!==false && owners.length<=1;
+    return `<tr data-u="${esc(u._id)}">
+      <td><b>${esc(u.username)}</b>${self?' <span class="sm">(you)</span>':''}</td>
+      <td><span class="role-badge ${u.role==="Owner"?"":"admin"}">${esc(u.role)}</span></td>
+      <td>${u.active===false?pill("cancelled").replace("Cancelled","Disabled"):pill("verified").replace("Payment verified","Active")}</td>
+      <td class="sm dt">${u.lastLogin?fmtDate(u.lastLogin):"Never"}</td>
+      <td><div class="acts">
+        <input type="password" placeholder="New password" data-pw id="pw-${esc(u._id)}" autocomplete="new-password"><button class="btn btn-ghost btn-sm" data-act="reset" type="button">Reset</button>
+        ${self||lastOwner?"":`<button class="btn btn-ghost btn-sm" data-act="toggle" type="button">${u.active===false?"Enable":"Disable"}</button>`}
+        ${self||lastOwner?"":`<button class="btn btn-ghost btn-sm" data-act="role" type="button">Make ${u.role==="Owner"?"Admin":"Owner"}</button>`}
+        ${self||lastOwner?"":`<button class="btn btn-bad btn-sm" data-act="del" type="button">Remove</button>`}
+      </div></td></tr>`; }).join("");
+  $$("#userRows tr").forEach(tr => {
+    const id = tr.dataset.u, u = adminUsers.find(x=>x._id===id);
+    tr.querySelectorAll("[data-act]").forEach(b => b.onclick = async () => {
+      const ref = db.doc("admins/" + id);
+      try {
+        if (b.dataset.act === "reset") {
+          const pw = tr.querySelector("[data-pw]").value;
+          if (pw.length < 8) { toast("New password needs at least 8 characters"); return; }
+          const salt = newSalt(); await ref.update({ salt, hash: await hashPw(salt, pw) }); toast(`Password reset for ${u.username}`);
+        } else if (b.dataset.act === "toggle") { await ref.update({ active: u.active === false }); toast(u.active===false?"User enabled":"User disabled"); }
+        else if (b.dataset.act === "role") { await ref.update({ role: u.role==="Owner"?"Admin":"Owner" }); toast("Role updated"); }
+        else if (b.dataset.act === "del") {
+          if (b.dataset.armed !== "1") { b.dataset.armed = "1"; b.textContent = "Confirm remove"; setTimeout(()=>{ b.dataset.armed=""; b.textContent="Remove"; }, 4000); return; }
+          await ref.delete(); toast(`${u.username} removed`);
+        }
+      } catch { toast("Couldn't save the change. Try again."); }
+    });
+  });
+}
+$("#nuAdd").onclick = async () => {
+  const name = $("#nuName").value.trim(), id = uname(name), pw = $("#nuPass").value;
+  if (!/^[a-z0-9._-]{3,30}$/.test(id)) { toast("Username: 3–30 letters, numbers, . _ -"); return; }
+  if (adminUsers.some(u => u._id === id)) { toast("That username already exists"); return; }
+  if (pw.length < 8) { toast("Password needs at least 8 characters"); return; }
+  const salt = newSalt();
+  try {
+    await db.doc("admins/" + id).set({ username:name, role:$("#nuRole").value, salt, hash: await hashPw(salt, pw), active:true, createdAt:Date.now(), createdBy: me?.username || "" });
+    $("#nuName").value = ""; $("#nuPass").value = ""; toast(`${name} added`);
+  } catch { toast("Couldn't add the user. Try again."); }
+};
+$("#cpSave").onclick = async () => {
+  if (!me) return;
+  if ((await hashPw(me.salt, $("#cpOld").value)) !== me.hash) { toast("Current password is wrong"); return; }
+  const pw = $("#cpNew").value; if (pw.length < 8) { toast("New password needs at least 8 characters"); return; }
+  const salt = newSalt();
+  try { await db.doc("admins/" + me._id).update({ salt, hash: await hashPw(salt, pw) }); $("#cpOld").value=""; $("#cpNew").value=""; toast("Password updated"); }
+  catch { toast("Couldn't update the password"); }
+};
+
+/* ---------- routing ---------- */
+function route(){
+  const admin = location.hash === "#admin";
+  const allow = isAdmin || (admin && !db);
+  const inAdmin = admin && allow;
+  $("#admin-view").hidden = !inAdmin;
+  $("#site-view").hidden = inAdmin;
+  $("#mbar").style.visibility = inAdmin ? "hidden" : "";
+  if (!inAdmin) return;
+  const needLogin = !!db && !me;
+  $("#loginView").hidden = !needLogin;
+  $("#adminMain").hidden = needLogin;
+  if (needLogin) { closeDrawer(); setTimeout(()=>$("#lgUser").focus(), 50); return; }
+  if (!db && !apps.length) { usingExample = true; apps = EXAMPLES.map((a,i)=>({...a,_id:"ex"+i})); $("#exampleTag").hidden=false; }
+  renderUsers(); renderAdmin(); scrollTo(0,0);
+}
+addEventListener("hashchange", route);
+route();
+
+/* ---------- boot capabilities ---------- */
+(async () => {
+  if (!window.claude || !claude.use) return;
+  [db, user] = await Promise.all([claude.use("db"), claude.use("user")]);
+  assets = await claude.use("assets");
+  downloads = await claude.use("downloads");
+  if (!assets) { $("#shotReq").textContent = ""; $("#shotLabel").textContent = "Screenshot upload isn't available here. Your UTR number is enough; keep the screenshot to share if asked."; $("#shot").disabled = true; }
+  if (user) { uid = await user.id(); isAdmin = !!(await user.canEdit()); }
+  if (isAdmin) { $("#admin-link").hidden = false; usingExample = false; apps = []; $("#exampleTag").hidden = true; }
+  route();
+  if (!db) return;
+  db.doc("config/payment").onSnapshot(s => {
+    config = s.exists ? (s.data()||{}) : {};
+    renderConfig();
+    if (isAdmin) { $("#setUpi").value = config.upiId||""; $("#setPayee").value = config.payee||""; $("#setWa").value = config.whatsapp||""; $("#setBatch").value = config.batchStart||""; }
+  }, () => {});
+  if (uid) {
+    try { const mine = await db.doc("applications/" + uid).get(); if (mine.exists) showSuccess(mine.data(), false); } catch {}
+  }
+  if (isAdmin) {
+    db.collection("admins").onSnapshot(snap => {
+      const first = !usersLoaded, wasIn = !!me;
+      adminUsers = snap.docs.map(d => ({...d.data(), _id:d.id})); usersLoaded = true;
+      if (me) { const fresh = adminUsers.find(u => u._id === me._id); if (!fresh || fresh.active === false) { me = null; sSet(null); toast("Your admin access was removed"); } else me = fresh; }
+      restoreSession();
+      if (first || wasIn !== !!me) route(); else renderUsers();
+    }, () => { usersLoaded = true; });
+    const timer = setTimeout(() => renderAdmin(), 10000);
+    db.collection("applications").onSnapshot(snap => {
+      clearTimeout(timer);
+      apps = snap.docs.map(d => ({...d.data(), _id:d.id}));
+      renderAdmin();
+      if (openId && !$("#drawer").hidden) openDrawer(openId);
+    }, () => { clearTimeout(timer); renderAdmin(); });
+  }
+})();
+})();
+</script>
+
+</body></html>
