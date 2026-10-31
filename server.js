@@ -20,11 +20,16 @@ const SESSION_HOURS = 12;
 const COOKIE = "techly_admin";
 const DUMMY_HASH = bcrypt.hashSync(crypto.randomBytes(16).toString("hex"), 12);
 
-if (!MONGODB_URI) { console.error("MONGODB_URI is not set"); process.exit(1); }
-if (!JWT_SECRET || JWT_SECRET.length < 32) { console.error("JWT_SECRET must be set (32+ chars)"); process.exit(1); }
+// Missing config must never take the website down: the static site keeps
+// working and only the admissions API reports "unavailable".
+const CONFIG_ERRORS = [];
+if (!MONGODB_URI) CONFIG_ERRORS.push("MONGODB_URI is not set");
+if (!JWT_SECRET || JWT_SECRET.length < 32) CONFIG_ERRORS.push("JWT_SECRET must be set (32+ chars)");
+CONFIG_ERRORS.forEach(e => console.error("CONFIG:", e));
 
-const client = new MongoClient(MONGODB_URI, { serverSelectionTimeoutMS: 10000 });
+const client = MONGODB_URI ? new MongoClient(MONGODB_URI, { serverSelectionTimeoutMS: 10000 }) : null;
 let db, Apps, Admins, Settings, Shots;
+let dbReady = false;
 
 /* ---------- helpers ---------- */
 const pad = n => String(n).padStart(2, "0");
@@ -73,6 +78,8 @@ app.use((req, res, next) => {
 });
 app.use(express.json({ limit: "100kb" }));
 app.use(cookieParser());
+app.get("/healthz", (req, res) => res.json({ ok: true, db: dbReady }));
+app.use("/api", (req, res, next) => dbReady ? next() : res.status(503).json({ error: "Admissions are temporarily unavailable. Please try again in a few minutes." }));
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -325,7 +332,23 @@ app.use((err, req, res, next) => {
 });
 
 /* ---------- start ---------- */
-(async () => {
+app.listen(PORT, () => console.log(`Techly running on http://localhost:${PORT}  (admin: /admin)`));
+
+async function connectDb(attempt = 1) {
+  if (CONFIG_ERRORS.length) { console.error("Admissions API disabled until the config above is fixed."); return; }
+  try {
+    await initDb();
+    dbReady = true;
+    console.log("MongoDB connected, admissions API ready");
+  } catch (e) {
+    const wait = Math.min(60, 5 * attempt);
+    console.error(`MongoDB connection failed (attempt ${attempt}): ${e.message}. Retrying in ${wait}s`);
+    setTimeout(() => connectDb(attempt + 1), wait * 1000);
+  }
+}
+connectDb();
+
+async function initDb() {
   await client.connect();
   db = client.db(MONGODB_DB);
   Apps = db.collection("applications");
@@ -340,7 +363,6 @@ app.use((err, req, res, next) => {
   ]);
   const owners = await Admins.countDocuments({});
   if (!owners) console.warn("No admin users yet. Create one with: npm run create-owner -- <email> <password> [name]");
-  app.listen(PORT, () => console.log(`Techly running on http://localhost:${PORT}  (admin: /admin)`));
-})().catch(e => { console.error("Startup failed:", e.message); process.exit(1); });
+}
 
 module.exports = app;
