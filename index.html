@@ -78,6 +78,9 @@ p{margin:0}
 .nav-cta{display:flex;align-items:center;gap:12px}
 .nav-phone{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
 .nav .btn{--h:44px;padding-inline:18px;font-size:14px}
+.nav .logo,.nav-cta{flex:none}
+.nav-links a,.nav-phone,.nav .btn{white-space:nowrap}
+@media (max-width:1360px){.nav-phone{display:none}.nav-links a{padding:8px 11px}}
 .menu-btn{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);align-items:center;justify-content:center}
 .menu-btn span{display:block;width:18px;height:2px;background:var(--fg);border-radius:2px;position:relative}
 .menu-btn span::before,.menu-btn span::after{content:"";position:absolute;left:0;width:18px;height:2px;background:var(--fg);border-radius:2px;transition:transform .25s}
