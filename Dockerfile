@@ -1,5 +1,11 @@
-FROM nginx:1.27-alpine
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY index.html courses.html /usr/share/nginx/html/
-COPY favicon.ico favicon.svg favicon-16x16.png favicon-32x32.png apple-touch-icon.png icon-192.png icon-512.png site.webmanifest /usr/share/nginx/html/
+FROM node:20-alpine
+WORKDIR /app
+ENV NODE_ENV=production PORT=80
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev && npm cache clean --force
+COPY server.js ./
+COPY scripts ./scripts
+COPY public ./public
 EXPOSE 80
+USER node
+CMD ["node", "server.js"]

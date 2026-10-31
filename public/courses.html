@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>TECHLY AI × SI Master Class</title>
+<meta name="description" content="Learn 20 AI tools in 20 days. TECHLY AI × SI Master Class, online and offline, ₹999 with certificate.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="/assets/course.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><clipPath id="techly-clip"><circle cx="40" cy="40" r="40"/></clipPath><symbol id="techly-mark" viewBox="0 0 123 80"><circle cx="40" cy="40" r="40" fill="#0EA5E9"/><circle cx="82.5" cy="40" r="40" fill="#6366F1"/><circle cx="82.5" cy="40" r="40" fill="#FFFFFF" clip-path="url(#techly-clip)"/></symbol></defs></svg>
+<nav class="top">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Techly home"><svg class="mark" width="45" height="29" viewBox="0 0 123 80" aria-hidden="true"><use href="#techly-mark"/></svg><span class="wordmark">Tech<span>ly</span></span></a>
+    <div class="nav-links">
+      <a class="hide-m" href="#highlights">Highlights</a>
+      <a class="hide-m" href="#tools">20 AI Tools</a>
+      <a class="hide-m" href="#certificate">Certificate</a>
+      <a class="btn btn-primary btn-sm" href="#apply">Apply Now</a>
+    </div>
+  </div>
+</nav>
+
+<main id="site-view">
+<header class="hero" id="top">
+  <canvas id="net" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">TECHLY presents · 20-Day Program</p>
+      <h1 style="margin-top:16px"><span class="grad">AI<span class="x">×</span>SI</span><br>Master Class</h1>
+      <p class="sub">Artificial Intelligence × Smart Innovation. Learn 20 AI tools in 20 days.</p>
+      <p class="lead">A practical, hands-on program for content creation, image and video generation, coding, automation, research and business growth. No advanced technical knowledge needed.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="#apply">Apply Now →</a>
+        <a class="btn btn-ghost" href="#tools">See the 20 tools</a>
+      </div>
+      <div class="ai-demo" aria-label="Examples of what you'll do with AI tools">
+        <div class="ai-bar"><span>What you'll do in class</span><span class="live">Live</span></div>
+        <div class="ai-line"><span class="ai-tool" id="aiTool">ChatGPT</span><span class="ai-prompt" id="aiPrompt">Write 5 Instagram captions for my bakery</span></div>
+        <div class="ai-out" id="aiOut"><div class="bar"></div><div class="shine"></div><span id="aiRes">✓ 5 captions ready</span></div>
+      </div>
+    </div>
+    <aside class="ticket" aria-label="Admission fee">
+      <div class="ticket-in">
+        <span class="tag">Admission Open</span>
+        <div class="price">₹999<small>/- only</small></div>
+        <p style="color:var(--muted);margin-top:6px">One-time payment per person. Full course, no hidden fees.</p>
+        <dl>
+          <dt id="batchDt" hidden>Joining</dt><dd id="batchDd" hidden></dd>
+          <dt>Duration</dt><dd>20 Days</dd>
+          <dt>Mode</dt><dd>Online &amp; Offline</dd>
+          <dt>Tools</dt><dd>20 AI tools, hands-on</dd>
+          <dt>Certificate</dt><dd>On successful completion</dd>
+        </dl>
+        <a class="btn btn-primary pulse" href="#apply">Pay &amp; Register</a>
+        <p class="note">Limited admissions per batch</p>
+      </div>
+    </aside>
+  </div>
+</header>
+
+<section class="block" id="highlights">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Why join</p>
+      <h2>Everything you get for <span class="grad">₹999</span></h2>
+    </div>
+    <div class="hl-grid" id="hl-grid"></div>
+  </div>
+</section>
+
+<section class="block" style="padding-top:0">
+  <div class="wrap about">
+    <div>
+      <p class="eyebrow">About the course</p>
+      <h2 style="margin-top:12px">Welcome to TECHLY AI × SI Master Class</h2>
+    </div>
+    <div>
+      <p class="lead">Join our 20-day practical training program and explore the power of Artificial Intelligence and Smart Innovation.</p>
+      <p class="lead">You will learn how to use 20 different AI tools for content creation, image generation, video creation, coding, automation, productivity, research and business development.</p>
+      <p style="margin-top:22px;font-weight:700">Who can apply</p>
+      <div class="who" style="margin-top:12px">
+        <div><span>01</span>Beginners</div>
+        <div><span>02</span>Students</div>
+        <div><span>03</span>Entrepreneurs</div>
+        <div><span>04</span>Freelancers</div>
+        <div><span>05</span>Working professionals</div>
+        <div><span>06</span>Business owners</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="tools" style="background:var(--bg2);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Curriculum</p>
+      <h2>20 AI tools you'll learn to use</h2>
+      <p class="lead">Ten named platforms plus ten tool categories, so you leave knowing both the leaders and how to choose alternatives.</p>
+    </div>
+    <div class="tools" id="tools-grid"></div>
+    <div class="tools-key"><span><i style="background:var(--magenta)"></i>Named platform</span><span><i style="background:var(--cyan)"></i>Tool category</span></div>
+  </div>
+</section>
+
+<section class="block cert-band" id="certificate">
+  <div class="wrap cert">
+    <div class="cert-card" aria-label="Sample certificate">
+      <div class="c-brand" style="display:flex;align-items:center;gap:8px"><svg width="34" height="22" viewBox="0 0 123 80" aria-hidden="true"><use href="#techly-mark"/></svg><span class="wordmark" style="font-size:clamp(13px,1.6vw,17px)">Tech<span>ly</span></span></div>
+      <div class="c-title">Certificate of<br>Completion</div>
+      <div class="c-small">This is to certify that</div>
+      <div class="c-name">Your Name Here</div>
+      <div class="c-small">has successfully completed the 20-day AI × SI Master Class, covering 20 AI tools.</div>
+      <div class="c-foot"><span>Admission ID<br>TAI-XXXXXX</span><div class="seal">AI×SI<br>20 DAYS</div><span style="text-align:right">Director<br>TECHLY</span></div>
+    </div>
+    <div>
+      <p class="eyebrow">Certification</p>
+      <h2 style="margin-top:12px">Get Your Course Completion Certificate!</h2>
+      <p class="lead" style="margin-top:14px">Every participant who successfully completes the 20-day AI × SI Master Class will receive a certificate from TECHLY.</p>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Issued in your name with your Admission ID</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Add it to your resume and LinkedIn profile</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Included in the ₹999 fee</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="apply">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Admission form</p>
+      <h2>Apply in 3 simple steps</h2>
+    </div>
+    <div class="apply">
+      <div class="side">
+        <div class="feebox">
+          <p class="eyebrow">Admission fee</p>
+          <div class="amt">₹999/- <span style="font-size:18px;color:var(--muted)">only</span></div>
+          <ul>
+            <li>Full course fee paid in advance</li>
+            <li>Payment is mandatory to confirm admission</li>
+            <li>One-time payment of ₹999 per participant</li>
+          </ul>
+          <div class="batch" id="sideBatch" hidden><span style="color:var(--dim)">Next batch joining date</span><b id="sideBatchDate"></b></div>
+        </div>
+        <div class="warnbox">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/></svg>
+          <p>Your admission will be confirmed only after successful payment verification. Please complete the ₹999 payment before submitting your registration.</p>
+        </div>
+      </div>
+
+      <div class="console" id="console">
+        <div class="steps" id="steps">
+          <div class="step on" data-s="1"><b>1</b><span>Your details</span></div>
+          <div class="step" data-s="2"><b>2</b><span>Payment</span></div>
+          <div class="step" data-s="3"><b>3</b><span>Review &amp; submit</span></div>
+        </div>
+        <form id="form" novalidate>
+          <div class="pane" data-pane="1">
+            <div class="grid2">
+              <div class="f full"><label for="fullName">Full Name <span class="req">*</span></label><input type="text" id="fullName" autocomplete="name" placeholder="As it should appear on your certificate"><div class="msg">Enter your full name.</div></div>
+              <div class="f"><label for="mobile">Mobile Number <span class="req">*</span></label><input type="tel" id="mobile" inputmode="numeric" maxlength="10" autocomplete="tel-national" placeholder="10-digit number"><div class="msg">Enter a valid 10-digit mobile number.</div></div>
+              <div class="f"><label for="whatsapp">WhatsApp Number <span class="req">*</span></label><input type="tel" id="whatsapp" inputmode="numeric" maxlength="10" placeholder="10-digit number"><div class="msg">Enter a valid 10-digit WhatsApp number.</div>
+                <label class="check" style="margin-top:8px;font-weight:500"><input type="checkbox" id="sameWa"> Same as mobile number</label></div>
+              <div class="f"><label for="email">Email Address <span class="req">*</span></label><input type="email" id="email" autocomplete="email" placeholder="you@example.com"><div class="msg">Enter a valid email address.</div></div>
+              <div class="f"><label for="age">Age <span class="req">*</span></label><input type="number" id="age" min="12" max="80" inputmode="numeric" placeholder="e.g. 22"><div class="msg">Enter an age between 12 and 80.</div></div>
+              <div class="f full"><label>Gender <span class="req">*</span></label>
+                <div class="seg" id="gender">
+                  <label><input type="radio" name="gender" id="g-m" value="Male"><span>Male</span></label>
+                  <label><input type="radio" name="gender" id="g-f" value="Female"><span>Female</span></label>
+                  <label><input type="radio" name="gender" id="g-o" value="Other"><span>Other</span></label>
+                  <label><input type="radio" name="gender" id="g-n" value="Prefer not to say"><span>Prefer not to say</span></label>
+                </div><div class="msg">Select an option.</div></div>
+              <div class="f"><label for="city">City / District <span class="req">*</span></label><input type="text" id="city" placeholder="e.g. Madurai"><div class="msg">Enter your city or district.</div></div>
+              <div class="f"><label for="qualification">Educational Qualification <span class="req">*</span></label>
+                <select id="qualification"><option value="">Select</option><option>10th / SSLC</option><option>12th / HSC</option><option>Diploma</option><option>Undergraduate (UG)</option><option>Postgraduate (PG)</option><option>Doctorate / PhD</option><option>Other</option></select><div class="msg">Select your qualification.</div></div>
+              <div class="f full"><label for="org">College / Company Name <span class="opt">(optional)</span></label><input type="text" id="org"></div>
+              <div class="f full"><label>Current Profession <span class="req">*</span></label>
+                <div class="seg" id="profession">
+                  <label><input type="radio" name="profession" id="p-st" value="Student"><span>Student</span></label>
+                  <label><input type="radio" name="profession" id="p-wp" value="Working Professional"><span>Working Professional</span></label>
+                  <label><input type="radio" name="profession" id="p-bo" value="Business Owner"><span>Business Owner</span></label>
+                  <label><input type="radio" name="profession" id="p-fl" value="Freelancer"><span>Freelancer</span></label>
+                  <label><input type="radio" name="profession" id="p-ot" value="Other"><span>Other</span></label>
+                </div><div class="msg">Select your current profession.</div></div>
+              <div class="f"><label>Preferred Learning Mode <span class="req">*</span></label>
+                <div class="seg" id="mode">
+                  <label><input type="radio" name="mode" id="m-on" value="Online"><span>Online</span></label>
+                  <label><input type="radio" name="mode" id="m-off" value="Offline"><span>Offline</span></label>
+                </div><div class="msg">Choose online or offline.</div></div>
+              <div class="f"><label for="joiningDate">Joining Date <span class="req">*</span></label><input type="date" id="joiningDate"><div class="hint" id="joinHint">The date you want to start the course.</div><div class="msg">Choose a joining date from today onwards.</div></div>
+              <div class="f full"><label for="why">Why do you want to learn AI? <span class="opt">(optional)</span></label><textarea id="why" maxlength="600" placeholder="Tell us your goal, e.g. grow my business, get a better job, create content"></textarea></div>
+            </div>
+            <div class="actions"><span></span><button type="button" class="btn btn-primary" data-next="2">Continue to Payment →</button></div>
+          </div>
+
+          <div class="pane" data-pane="2" hidden>
+            <div class="pay">
+              <div>
+                <div class="qr empty" id="qr">QR code will appear here once TECHLY publishes its payment details.</div>
+                <p style="font-size:12px;color:var(--dim);margin-top:8px;text-align:center">Scan with GPay, PhonePe, Paytm or any UPI app</p>
+              </div>
+              <div>
+                <div class="pay-amt"><span style="color:var(--muted);font-weight:600">Amount to pay</span><strong>₹999.00</strong></div>
+                <p style="font-weight:700;font-size:13px;margin-bottom:6px">UPI ID</p>
+                <div class="upi-row"><code id="upiText">Not published yet</code><button type="button" class="btn btn-ghost btn-sm" id="copyUpi">Copy</button></div>
+                <p id="payee" style="font-size:13px;color:var(--muted);margin-top:6px"></p>
+                <a class="btn btn-ghost btn-sm" id="upiLink" href="#" style="margin-top:10px" hidden>Open UPI app</a>
+                <div class="warnbox" style="margin-top:16px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/></svg><p>Pay ₹999 first, then enter the Transaction ID / UTR below. Admission is confirmed only after verification.</p></div>
+              </div>
+            </div>
+            <div class="grid2" style="margin-top:22px">
+              <div class="f"><label for="utr">Transaction ID / UTR Number <span class="req">*</span></label><input type="text" id="utr" maxlength="30" placeholder="12-digit UTR or UPI reference" style="font-family:var(--mono)"><div class="msg">Enter the Transaction ID or 12-digit UTR from your payment app.</div></div>
+              <div class="f"><label for="paymentDate">Payment Date <span class="req">*</span></label><input type="date" id="paymentDate"><div class="msg">Enter the date you paid (not a future date).</div></div>
+              <div class="f full" id="shotField"><label>Payment Screenshot <span class="req" id="shotReq">*</span></label>
+                <label class="drop" for="shot"><input type="file" id="shot" accept="image/*"><span id="shotLabel">Tap to upload the payment success screenshot (JPG/PNG, max 5 MB)</span><img id="shotPrev" alt="" hidden></label>
+                <div class="msg">Upload your payment screenshot (image under 5 MB).</div></div>
+              <div class="f full"><label class="check"><input type="checkbox" id="paidConfirm"> I confirm I have paid ₹999 to TECHLY for the AI × SI Master Class, and the details above are correct.</label><div class="msg">Please confirm your payment.</div></div>
+            </div>
+            <div class="actions"><button type="button" class="btn btn-ghost" data-next="1">← Back</button><button type="button" class="btn btn-primary" data-next="3">Review Application →</button></div>
+          </div>
+
+          <div class="pane" data-pane="3" hidden>
+            <dl class="review" id="reviewList"></dl>
+            <div class="f" style="margin-top:18px"><label class="check"><input type="checkbox" id="agree"> I agree that TECHLY may contact me on phone, WhatsApp and email about this course.</label><div class="msg">Please accept to continue.</div></div>
+            <p id="submitErr" style="color:var(--bad);font-size:14px;margin-top:12px" hidden></p>
+            <div class="actions"><button type="button" class="btn btn-ghost" data-next="2">← Back</button><button type="submit" class="btn btn-primary" id="submitBtn">Pay &amp; Register ✓</button></div>
+          </div>
+        </form>
+        <div class="success" id="success" hidden></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <canvas id="net2" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <p class="eyebrow">Admissions open</p>
+    <h2 style="margin-top:14px"><span class="grad">YOUR AI JOURNEY</span><br>STARTS HERE!</h2>
+    <p class="lead">Learn 20 powerful AI tools in just 20 days.</p>
+    <p class="tagline">Upgrade your skills. Explore AI. Build smarter.</p>
+    <p style="margin-top:22px;font:700 20px var(--display)">Join TECHLY AI × SI MASTER CLASS Today!</p>
+    <p class="fee">Course Fee: ₹999/- Only</p>
+    <a class="btn btn-primary pulse" href="#apply">APPLY NOW</a>
+    <p class="limited">Limited Admissions – Register Now!</p>
+  </div>
+</section>
+</main>
+
+
+
+<div class="mbar" id="mbar"><div><strong>₹999</strong><small>20 days · 20 AI tools</small></div><a class="btn btn-primary btn-sm" href="#apply">Apply Now</a></div>
+<footer><div class="wrap"><span style="display:flex;align-items:center;gap:10px"><svg class="mark" width="34" height="22" viewBox="0 0 123 80" aria-hidden="true"><use href="#techly-mark"/></svg><span class="wordmark" style="font-size:17px">Tech<span>ly</span></span><span>© 2026 · AI × SI Master Class</span></span><span>Admissions confirmed after payment verification · <a href="/">techlyai.in</a></span></div></footer>
+<div class="toast" id="toast" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+(() => {
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const toast = (m) => { const t=$("#toast"); t.textContent=m; t.hidden=false; clearTimeout(toast._t); toast._t=setTimeout(()=>t.hidden=true,2600); };
+const copy = async (text) => { try { await navigator.clipboard.writeText(text); toast("Copied"); } catch { toast("Select and copy: " + text.slice(0,40)); } };
+const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------- dates ---------- */
+const pad = n => String(n).padStart(2,"0");
+const ymd = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const TODAY = ymd(new Date());
+const fmtDay = s => { if (!s) return "—"; const [y,m,d] = s.split("-").map(Number); return new Date(y,m-1,d).toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"}); };
+const fmtDate = ts => { const d=new Date(ts); return `${fmtDay(ymd(d))}, ${d.toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit"})}`; };
+$("#joiningDate").min = TODAY;
+$("#paymentDate").max = TODAY; $("#paymentDate").value = TODAY;
+
+/* ---------- static content ---------- */
+const ic = {
+  cal:'<path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/>',
+  grid:'<path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/>',
+  wifi:'<path d="M5 12.5a10 10 0 0114 0M8.5 16a5 5 0 017 0M12 19.5h.01M2 9a15 15 0 0120 0"/>',
+  hand:'<path d="M9 11V5a2 2 0 014 0v6m0-3a2 2 0 014 0v5a7 7 0 01-7 7h-1a6 6 0 01-5-3l-2-3a2 2 0 013-2l2 2V8a2 2 0 012 0"/>',
+  seed:'<path d="M12 22V12m0 0C12 7 8 4 3 4c0 5 4 8 9 8zm0 0c0-5 4-8 9-8 0 5-4 8-9 8"/>',
+  globe:'<path d="M12 2a10 10 0 100 20 10 10 0 000-20zM2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/>',
+  brief:'<path d="M3 7h18v13H3zM8 7V5a2 2 0 012-2h4a2 2 0 012 2v2M3 13h18"/>',
+  award:'<path d="M12 15a6 6 0 100-12 6 6 0 000 12zM8.5 14l-1.5 8 5-3 5 3-1.5-8"/>',
+  rupee:'<path d="M6 3h12M6 8h12M6 13l9 8M6 13h3a5 5 0 000-10"/>'
+};
+const highlights = [
+  ["cal","20 Days of AI Training","A structured day-by-day program"],
+  ["grid","Learn 20 AI Tools","Leading platforms and tool categories"],
+  ["wifi","Online & Offline Classes","Choose the mode that suits you"],
+  ["hand","Practical Hands-on Learning","Build real outputs in every session"],
+  ["seed","Beginner-Friendly Training","No coding or tech background needed"],
+  ["globe","Real-World AI Applications","Use cases from work, study and business"],
+  ["brief","AI for Business & Productivity","Save hours and grow faster with AI"],
+  ["award","Course Completion Certificate","Issued by TECHLY on completion"],
+  ["rupee","Affordable Fee – Just ₹999","One-time payment, full course access"]
+];
+$("#hl-grid").innerHTML = highlights.map(([k,t,d],i) => `<div class="hl${i===8?' feat':''}"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ic[k]}</svg></div><div><h3>${t}</h3><p>${d}</p></div></div>`).join("");
+const tools = ["ChatGPT (GPT)","Claude AI","Google Gemini","Lovable AI","ElevenLabs","Nano Banana","Google Flow","Google Antigravity","Perplexity AI","Microsoft Copilot","AI Image Generation Tools","AI Video Generation Tools","AI Website Development Tools","AI Coding Assistants","AI Voice Generation Tools","AI Presentation Tools","AI Automation Tools","AI Research Tools","AI Content Creation Tools","AI Productivity Tools"];
+$("#tools-grid").innerHTML = tools.map((t,i)=>`<div class="tool${i<10?' named':''}" data-i="${i}"><b>${String(i+1).padStart(2,"0")}</b>${t}</div>`).join("");
+
+/* ---------- neural network canvases (pulses travel along links) ---------- */
+function neural(canvas, density){
+  const x = canvas.getContext("2d"); let W,H,pts=[],sig=[],raf;
+  const size = () => { const r=canvas.getBoundingClientRect(), d=Math.min(devicePixelRatio||1,2); W=r.width; H=r.height; canvas.width=W*d; canvas.height=H*d; x.setTransform(d,0,0,d,0,0);
+    const n=Math.round(Math.min(64, W*H/density)); pts=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,r:1.4+Math.random()*1.8})); sig=[]; };
+  const links = () => { const L=[]; for (let i=0;i<pts.length;i++) for (let j=i+1;j<pts.length;j++){ const a=pts[i],b=pts[j],d=Math.hypot(a.x-b.x,a.y-b.y); if(d<140) L.push([a,b,d]); } return L; };
+  const draw = () => { x.clearRect(0,0,W,H);
+    if(!still) for (const p of pts){ p.x+=p.vx; p.y+=p.vy; if(p.x<0||p.x>W)p.vx*=-1; if(p.y<0||p.y>H)p.vy*=-1; }
+    const L = links();
+    for (const [a,b,d] of L){ x.strokeStyle=`rgba(99,102,241,${(1-d/140)*.3})`; x.lineWidth=1; x.beginPath(); x.moveTo(a.x,a.y); x.lineTo(b.x,b.y); x.stroke(); }
+    for (const p of pts){ x.fillStyle="rgba(14,165,233,.6)"; x.beginPath(); x.arc(p.x,p.y,p.r,0,7); x.fill(); }
+    if (!still) {
+      if (L.length && sig.length < 14 && Math.random() < .12) { const [a,b]=L[Math.random()*L.length|0]; sig.push(Math.random()<.5?{a,b,t:0}:{a:b,b:a,t:0}); }
+      sig = sig.filter(s => (s.t += .018) < 1);
+      for (const s of sig){ const px=s.a.x+(s.b.x-s.a.x)*s.t, py=s.a.y+(s.b.y-s.a.y)*s.t;
+        const g=x.createRadialGradient(px,py,0,px,py,10); g.addColorStop(0,"rgba(99,102,241,.95)"); g.addColorStop(1,"rgba(99,102,241,0)");
+        x.fillStyle=g; x.beginPath(); x.arc(px,py,10,0,7); x.fill();
+        x.fillStyle="#fff"; x.beginPath(); x.arc(px,py,1.8,0,7); x.fill(); }
+      raf=requestAnimationFrame(draw);
+    } };
+  size(); draw(); addEventListener("resize",()=>{cancelAnimationFrame(raf);size();draw();});
+}
+neural($("#net"), 15000);
+neural($("#net2"), 20000);
+
+/* ---------- AI prompt demo ---------- */
+(() => {
+  const demos = [
+    ["ChatGPT","Write 5 Instagram captions for my bakery","✓ 5 captions ready",0],
+    ["Nano Banana","Design a Diwali sale poster for my shop","✓ Poster generated",5],
+    ["ElevenLabs","Tamil voice-over for my 30s ad","✓ Audio ready · 0:30",4],
+    ["Lovable AI","Build a booking website for my salon","✓ Website live",3],
+    ["Google Flow","Make a 10s product video","✓ Video rendered · 1080p",6],
+    ["Perplexity AI","Research AI trends in retail","✓ 12 sources summarised",8],
+    ["Claude AI","Turn my notes into a business plan","✓ 6-page plan drafted",1]
+  ];
+  const tool=$("#aiTool"), pr=$("#aiPrompt"), out=$("#aiOut"), res=$("#aiRes"), bar=out.querySelector(".bar");
+  if (still) return;
+  let k = 0;
+  const sleep = ms => new Promise(r=>setTimeout(r,ms));
+  const lit = i => { $$(".tool.lit").forEach(t=>t.classList.remove("lit")); const t=document.querySelector(`.tool[data-i="${i}"]`); if(t) t.classList.add("lit"); };
+  (async function loop(){
+    for(;;){
+      const [t,p,r,i] = demos[k++ % demos.length];
+      tool.textContent = t; pr.textContent = ""; res.textContent = ""; bar.style.transition="none"; bar.style.width="0"; lit(i);
+      for (const ch of p){ pr.textContent += ch; await sleep(38); }
+      await sleep(250);
+      out.classList.add("working"); res.textContent = "Generating…"; res.style.color = "var(--violet)";
+      void bar.offsetWidth; bar.style.transition = ""; bar.style.width = "100%";
+      await sleep(1500);
+      out.classList.remove("working"); res.textContent = r; res.style.color = "";
+      await sleep(2200);
+    }
+  })();
+})();
+
+/* ---------- state ---------- */
+let config = {};
+const SAVED = "techly_registration";
+const lsGet = () => { try { return JSON.parse(localStorage.getItem(SAVED) || "null"); } catch { return null; } };
+const lsSet = v => { try { localStorage.setItem(SAVED, JSON.stringify(v)); } catch {} };
+const lsDel = () => { try { localStorage.removeItem(SAVED); } catch {} };
+
+/* ---------- form steps ---------- */
+let step = 1;
+const radio = n => (document.querySelector(`input[name="${n}"]:checked`)||{}).value || "";
+const val = id => $("#"+id).value.trim();
+const setErr = (el, bad) => { const f = el.closest(".f"); if (f) f.classList.toggle("err", bad); return !bad; };
+const phoneOk = v => /^[6-9]\d{9}$/.test(v);
+
+$("#sameWa").addEventListener("change", e => { if (e.target.checked) $("#whatsapp").value = val("mobile"); });
+$("#mobile").addEventListener("input", () => { if ($("#sameWa").checked) $("#whatsapp").value = val("mobile"); });
+["mobile","whatsapp"].forEach(id => $("#"+id).addEventListener("input", e => e.target.value = e.target.value.replace(/\D/g,"").slice(0,10)));
+$$("#form input, #form select, #form textarea").forEach(el => el.addEventListener("input", () => el.closest(".f")?.classList.remove("err")));
+$$("#form input[type=radio], #form input[type=checkbox]").forEach(el => el.addEventListener("change", () => el.closest(".f")?.classList.remove("err")));
+
+function validate1(){
+  let ok = true, first=null;
+  const chk = (el, bad) => { if(!setErr(el,bad)){ ok=false; first=first||el; } };
+  chk($("#fullName"), val("fullName").length < 3);
+  chk($("#mobile"), !phoneOk(val("mobile")));
+  chk($("#whatsapp"), !phoneOk(val("whatsapp")));
+  chk($("#email"), !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val("email")));
+  const a = +val("age"); chk($("#age"), !(a>=12 && a<=80));
+  chk($("#gender"), !radio("gender"));
+  chk($("#city"), val("city").length < 2);
+  chk($("#qualification"), !val("qualification"));
+  chk($("#profession"), !radio("profession"));
+  chk($("#mode"), !radio("mode"));
+  chk($("#joiningDate"), !val("joiningDate") || val("joiningDate") < TODAY);
+  if (first) first.scrollIntoView({behavior:"smooth",block:"center"});
+  return ok;
+}
+let shotFile = null;
+function validate2(){
+  let ok = true;
+  if(!setErr($("#utr"), !/^[A-Za-z0-9]{6,30}$/.test(val("utr")))) ok=false;
+  if(!setErr($("#paymentDate"), !val("paymentDate") || val("paymentDate") > TODAY)) ok=false;
+  if (!shotFile){ setErr($("#shot"), true); ok=false; }
+  if(!setErr($("#paidConfirm"), !$("#paidConfirm").checked)) ok=false;
+  return ok;
+}
+function go(n){
+  if (n > step) { if (step===1 && !validate1()) return; if (step===2 && n>=3 && !validate2()) return; }
+  step = n;
+  $$(".pane").forEach(p => p.hidden = +p.dataset.pane !== n);
+  $$(".step").forEach(s => { const k=+s.dataset.s; s.classList.toggle("on",k===n); s.classList.toggle("done",k<n); });
+  if (n===3) renderReview();
+  $("#console").scrollIntoView({behavior:"smooth",block:"start"});
+}
+$$("[data-next]").forEach(b => b.addEventListener("click", () => go(+b.dataset.next)));
+
+function collect(){
+  return { fullName:val("fullName"), mobile:val("mobile"), whatsapp:val("whatsapp"), email:val("email").toLowerCase(), age:val("age"),
+    gender:radio("gender"), city:val("city"), qualification:val("qualification"), org:val("org"), profession:radio("profession"),
+    mode:radio("mode"), joiningDate:val("joiningDate"), why:val("why"), utr:val("utr").toUpperCase(), paymentDate:val("paymentDate"),
+    paidConfirm:String($("#paidConfirm").checked) };
+}
+const LABELS = [["fullName","Name"],["mobile","Mobile"],["whatsapp","WhatsApp"],["email","Email"],["age","Age"],["gender","Gender"],["city","City / District"],["qualification","Qualification"],["org","College / Company"],["profession","Profession"],["mode","Learning mode"],["joiningDate","Joining date",fmtDay],["why","Why AI"],["utr","Transaction / UTR"],["paymentDate","Payment date",fmtDay]];
+const cell = (d,[k,,f]) => esc((f ? f(d[k]) : d[k]) || "—");
+function renderReview(){
+  const d = collect();
+  $("#reviewList").innerHTML = LABELS.map(L => `<dt>${L[1]}</dt><dd>${cell(d,L)}</dd>`).join("") + `<dt>Fee</dt><dd>₹999 (one-time)</dd><dt>Screenshot</dt><dd>${shotFile?esc(shotFile.name):"—"}</dd>`;
+}
+
+$("#shot").addEventListener("change", e => {
+  const f = e.target.files[0];
+  if (!f) return;
+  if (!f.type.startsWith("image/") || f.size > 5*1024*1024){ shotFile=null; setErr($("#shot"),true); return; }
+  shotFile = f; setErr($("#shot"),false);
+  $("#shotLabel").textContent = f.name + " · tap to change";
+  const p = $("#shotPrev"); p.src = URL.createObjectURL(f); p.hidden = false;
+});
+
+/* Map server field names back to the step and element that shows the error. */
+const STEP_OF = { utr:2, paymentDate:2, screenshot:2, paidConfirm:2 };
+const FIELD_EL = { gender:"#gender", profession:"#profession", mode:"#mode", screenshot:"#shot" };
+
+/* ---------- submit ---------- */
+$("#form").addEventListener("submit", async e => {
+  e.preventDefault();
+  if (!setErr($("#agree"), !$("#agree").checked)) return;
+  const btn = $("#submitBtn"); btn.disabled = true; btn.textContent = "Submitting…";
+  const m = $("#submitErr"); m.hidden = true;
+  const reset = () => { btn.disabled = false; btn.textContent = "Pay & Register ✓"; };
+  const fd = new FormData();
+  Object.entries(collect()).forEach(([k,v]) => fd.append(k, v));
+  if (shotFile) fd.append("screenshot", shotFile);
+  try {
+    const r = await fetch("/api/applications", { method:"POST", body:fd });
+    const out = await r.json().catch(() => ({}));
+    if (!r.ok) {
+      reset();
+      const fields = out.fields || [];
+      fields.forEach(k => { const el = $(FIELD_EL[k] || "#"+k); if (el) setErr(el, true); });
+      const s = fields.length ? Math.min(...fields.map(k => STEP_OF[k] || 1)) : 3;
+      if (s < 3) { step = 3; go(s); toast(out.error || "Please check the highlighted fields"); }
+      else { m.hidden = false; m.textContent = out.error || "Couldn't save your registration. Try again."; }
+      return;
+    }
+    lsSet({ id: out.admissionId, mobile: out.mobile });
+    showSuccess(out);
+  } catch {
+    reset();
+    m.hidden = false; m.textContent = "Couldn't reach the server. Check your connection and try again.";
+  }
+});
+
+function detailsText(d){
+  return `TECHLY AI × SI Master Class – Registration\nAdmission ID: ${d.admissionId}\nName: ${d.fullName}\nMobile: ${d.mobile}\nEmail: ${d.email}\nMode: ${d.mode}\nJoining date: ${fmtDay(d.joiningDate)}\nFee: ₹999 paid on ${fmtDay(d.paymentDate)}\nUTR: ${d.utr}`;
+}
+const PILL = { pending:"Pending verification", verified:"Payment verified", rejected:"Payment rejected", submitted:"Submitted", confirmed:"Admission confirmed", cancelled:"Cancelled" };
+const pill = s => `<span class="status-pill st-${s}">${PILL[s]||s}</span>`;
+function showSuccess(d){
+  $("#form").hidden = true; $("#steps").hidden = true;
+  const s = $("#success"); s.hidden = false;
+  const wa = config.whatsapp ? `https://wa.me/91${config.whatsapp}?text=${encodeURIComponent(detailsText(d))}` : "";
+  const title = d.admissionStatus==="confirmed" ? "Admission confirmed!" : d.paymentStatus==="rejected" ? "Payment could not be verified" : "Registration received!";
+  s.innerHTML = `
+    <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg></div>
+    <h3 style="font-size:28px;margin-top:18px">${title}</h3>
+    <p class="lead" style="margin:10px auto 0">Thank you, ${esc(d.fullName.split(" ")[0])}. Keep your Admission ID for all communication with TECHLY.</p>
+    <div class="idbox">${esc(d.admissionId)}</div>
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px">${pill(d.paymentStatus)}${pill(d.admissionStatus)}</div>
+    <p style="font-weight:700;margin-top:16px">Joining date: ${esc(fmtDay(d.joiningDate))}</p>
+    <p style="color:var(--muted);font-size:14px;margin-top:8px;max-width:52ch;margin-inline:auto">Our team will verify your ₹999 payment (UTR ${esc(d.utr)}, paid ${esc(fmtDay(d.paymentDate))}) and confirm your admission on WhatsApp ${esc(d.whatsapp)} and email ${esc(d.email)}. Come back to this page anytime to check your status.</p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px">
+      <button class="btn btn-ghost btn-sm" id="copyDetails" type="button">Copy registration details</button>
+      ${wa?`<a class="btn btn-primary btn-sm" href="${wa}" target="_blank" rel="noopener">Send to TECHLY on WhatsApp</a>`:""}
+      <button class="btn btn-ghost btn-sm" id="newReg" type="button">Register another person</button>
+    </div>`;
+  $("#copyDetails").onclick = () => copy(detailsText(d));
+  $("#newReg").onclick = () => { lsDel(); location.reload(); };
+}
+
+/* ---------- config: payment + batch ---------- */
+function renderConfig(){
+  const q = $("#qr");
+  if (config.upiId) {
+    const name = config.payee || "TECHLY";
+    const uri = `upi://pay?pa=${encodeURIComponent(config.upiId)}&pn=${encodeURIComponent(name)}&am=999.00&cu=INR&tn=${encodeURIComponent("AI x SI Master Class")}`;
+    q.className = "qr"; q.innerHTML = "";
+    if (window.QRCode) new QRCode(q, { text: uri, width: 200, height: 200, colorDark:"#121735", colorLight:"#ffffff", correctLevel: QRCode.CorrectLevel.M });
+    else q.textContent = "QR unavailable — pay using the UPI ID";
+    $("#upiText").textContent = config.upiId;
+    $("#payee").textContent = "Payee: " + name;
+    const l = $("#upiLink"); l.href = uri; l.hidden = false;
+  }
+  const b = config.batchStart;
+  const show = !!b && b >= TODAY;
+  $("#batchDt").hidden = $("#batchDd").hidden = $("#sideBatch").hidden = !show;
+  if (show) {
+    $("#batchDd").textContent = "Next batch " + fmtDay(b);
+    $("#sideBatchDate").textContent = fmtDay(b);
+    $("#joinHint").textContent = "Next batch starts " + fmtDay(b) + ". Change it if you prefer a later date.";
+    if (!$("#joiningDate").value) $("#joiningDate").value = b;
+  }
+}
+$("#copyUpi").onclick = () => config.upiId && copy(config.upiId);
+
+/* ---------- boot ---------- */
+(async () => {
+  try { const r = await fetch("/api/settings"); if (r.ok) { config = await r.json(); renderConfig(); } } catch {}
+  const saved = lsGet();
+  if (saved && saved.id && saved.mobile) {
+    try {
+      const r = await fetch(`/api/status?id=${encodeURIComponent(saved.id)}&mobile=${encodeURIComponent(saved.mobile)}`);
+      if (r.ok) showSuccess(await r.json()); else if (r.status === 404) lsDel();
+    } catch {}
+  }
+})();
+})();
+</script>
+
+</body></html>

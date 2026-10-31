@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>TECHLY Admin · AI × SI Admissions</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="/assets/course.css">
+<style>
+.users-tbl input{width:140px}
+.loading{padding:60px 0;text-align:center;color:var(--muted)}
+.drawer .shot img{max-height:360px;object-fit:contain;background:var(--bg2);width:100%}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><clipPath id="techly-clip"><circle cx="40" cy="40" r="40"/></clipPath><symbol id="techly-mark" viewBox="0 0 123 80"><circle cx="40" cy="40" r="40" fill="#0EA5E9"/><circle cx="82.5" cy="40" r="40" fill="#6366F1"/><circle cx="82.5" cy="40" r="40" fill="#FFFFFF" clip-path="url(#techly-clip)"/></symbol></defs></svg>
+<nav class="top">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Techly home"><svg class="mark" width="45" height="29" viewBox="0 0 123 80" aria-hidden="true"><use href="#techly-mark"/></svg><span class="wordmark">Tech<span>ly</span></span></a>
+    <div class="nav-links">
+      <a class="hide-m" href="/courses.html">Course page</a>
+      <a href="/">techlyai.in</a>
+    </div>
+  </div>
+</nav>
+
+<main id="admin-view">
+  <div class="loading" id="bootView">Loading…</div>
+
+  <div class="wrap login-wrap" id="loginView" hidden>
+    <form class="login-card" id="loginForm" novalidate>
+      <div class="logo-stack"><svg class="mark" width="74" height="48" viewBox="0 0 123 80" aria-hidden="true"><use href="#techly-mark"/></svg><span class="wordmark" style="font-size:28px">Tech<span>ly</span></span></div>
+      <p class="eyebrow" style="margin-top:18px">TECHLY · Admin</p>
+      <h1 style="font-size:30px;margin-top:8px">Sign in to admissions</h1>
+      <div class="f" style="margin-top:22px"><label for="lgEmail">Email</label><input type="email" id="lgEmail" autocomplete="username" autocapitalize="off" placeholder="you@example.com"></div>
+      <div class="f" style="margin-top:14px"><label for="lgPass">Password</label><input type="password" id="lgPass" autocomplete="current-password"></div>
+      <p class="login-err" id="lgErr" hidden></p>
+      <button class="btn btn-primary" type="submit" id="lgBtn" style="width:100%;margin-top:20px">Sign in</button>
+      <p style="font-size:12px;color:var(--dim);margin-top:14px;text-align:center">Forgot your password? Ask an Owner to reset it in Admin users.</p>
+      <a href="/courses.html" style="display:block;text-align:center;font-size:13px;margin-top:8px">← Back to course page</a>
+    </form>
+  </div>
+
+  <div class="wrap" id="adminMain" hidden>
+    <div class="adm-head">
+      <div>
+        <p class="eyebrow">TECHLY · Admin</p>
+        <h1 style="margin-top:8px">AI × SI Admissions</h1>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <span class="me-chip" id="meChip"></span>
+        <button class="btn btn-ghost btn-sm" id="logoutBtn" type="button">Log out</button>
+        <button class="btn btn-ghost btn-sm" id="refreshBtn" type="button">Refresh</button>
+        <button class="btn btn-primary btn-sm" id="exportBtn" type="button">Download Excel</button>
+        <a class="btn btn-ghost btn-sm" href="/courses.html" target="_blank" rel="noopener">View site</a>
+      </div>
+    </div>
+    <div class="kpis" id="kpis"></div>
+    <div class="toolbar">
+      <input type="text" id="q" placeholder="Search name, mobile, email, Admission ID, UTR">
+      <select id="fPay"><option value="">All payments</option><option value="pending">Pending verification</option><option value="verified">Verified</option><option value="rejected">Rejected</option></select>
+      <select id="fMode"><option value="">All modes</option><option>Online</option><option>Offline</option></select>
+      <select id="fStatus"><option value="">All admissions</option><option value="submitted">Submitted</option><option value="confirmed">Confirmed</option><option value="cancelled">Cancelled</option></select>
+      <select id="fJoin"><option value="">All joining dates</option></select>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Admission ID</th><th>Student</th><th>Contact</th><th>City</th><th>Profession</th><th>Mode</th><th>UTR</th><th>Payment date</th><th>Joining date</th><th>Payment</th><th>Admission</th><th>Applied</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+
+    <details class="settings" id="settings" hidden>
+      <summary>Payment, batch &amp; contact settings</summary>
+      <div class="grid2">
+        <div class="f"><label for="setUpi">UPI ID</label><input type="text" id="setUpi" placeholder="e.g. techly@okaxis"></div>
+        <div class="f"><label for="setPayee">Payee name</label><input type="text" id="setPayee" placeholder="e.g. TECHLY AI"></div>
+        <div class="f"><label for="setBatch">Next batch joining date</label><input type="date" id="setBatch"><div class="hint">Shown on the page and pre-filled for students.</div></div>
+        <div class="f"><label for="setWa">TECHLY WhatsApp number (for students)</label><input type="tel" id="setWa" maxlength="10" placeholder="10-digit number"></div>
+        <div class="f full"><button class="btn btn-primary btn-sm" id="saveSettings" type="button">Save settings</button></div>
+      </div>
+    </details>
+
+    <details class="settings" id="usersPanel" hidden>
+      <summary>Admin users</summary>
+      <div class="tbl-wrap" style="margin-top:16px">
+        <table class="users-tbl"><thead><tr><th>User</th><th>Role</th><th>Status</th><th>Last login</th><th>Actions</th></tr></thead><tbody id="userRows"></tbody></table>
+      </div>
+      <p class="eyebrow" style="margin-top:22px">Add admin user</p>
+      <div class="grid2" style="margin-top:12px">
+        <div class="f"><label for="nuEmail">Email</label><input type="email" id="nuEmail" autocapitalize="off" placeholder="staff@example.com"></div>
+        <div class="f"><label for="nuName">Name</label><input type="text" id="nuName" placeholder="Shown in the panel"></div>
+        <div class="f"><label for="nuRole">Role</label><select id="nuRole"><option value="Admin">Admin – students &amp; payments</option><option value="Owner">Owner – also users &amp; settings</option></select></div>
+        <div class="f"><label for="nuPass">Password</label><input type="password" id="nuPass" autocomplete="new-password" placeholder="At least 8 characters"></div>
+        <div class="f full"><button class="btn btn-primary btn-sm" id="nuAdd" type="button">Add user</button></div>
+      </div>
+      <p style="font-size:12px;color:var(--dim);margin-top:12px">Share the email and password with the staff member privately. They sign in at this page and can change their password under "Change my password".</p>
+    </details>
+
+    <details class="settings" id="myPass">
+      <summary>Change my password</summary>
+      <div class="grid2">
+        <div class="f"><label for="cpOld">Current password</label><input type="password" id="cpOld" autocomplete="current-password"></div>
+        <div class="f"><label for="cpNew">New password</label><input type="password" id="cpNew" autocomplete="new-password" placeholder="At least 8 characters"></div>
+        <div class="f full"><button class="btn btn-primary btn-sm" id="cpSave" type="button">Update password</button></div>
+      </div>
+    </details>
+  </div>
+</main>
+
+<div class="drawer-bg" id="drawerBg" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-label="Student details"></aside>
+<footer><div class="wrap"><span style="display:flex;align-items:center;gap:10px"><svg class="mark" width="34" height="22" viewBox="0 0 123 80" aria-hidden="true"><use href="#techly-mark"/></svg><span class="wordmark" style="font-size:17px">Tech<span>ly</span></span><span>© 2026 · AI × SI Master Class · Admin</span></span></div></footer>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(() => {
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const toast = m => { const t=$("#toast"); t.textContent=m; t.hidden=false; clearTimeout(toast._t); toast._t=setTimeout(()=>t.hidden=true,2600); };
+const copy = async text => { try { await navigator.clipboard.writeText(text); toast("Copied"); } catch { toast("Couldn't copy"); } };
+const pad = n => String(n).padStart(2,"0");
+const ymd = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const TODAY = ymd(new Date());
+const fmtDay = s => { if (!s) return "—"; const [y,m,d] = s.split("-").map(Number); return new Date(y,m-1,d).toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"}); };
+const fmtDate = ts => { if (!ts) return "—"; const d=new Date(ts); return `${fmtDay(ymd(d))}, ${d.toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit"})}`; };
+const FEE = 999;
+const phoneOk = v => /^[6-9]\d{9}$/.test(v);
+
+/* ---------- API ---------- */
+async function api(path, opts = {}) {
+  const r = await fetch("/api" + path, {
+    method: opts.method || "GET",
+    headers: { "Content-Type": "application/json", "X-Requested-With": "techly" },
+    body: opts.body ? JSON.stringify(opts.body) : undefined,
+    credentials: "same-origin"
+  });
+  const data = await r.json().catch(() => ({}));
+  if (r.status === 401 && !opts.noRedirect) { me = null; show("login"); }
+  if (!r.ok) { const e = new Error(data.error || "Request failed"); e.status = r.status; throw e; }
+  return data;
+}
+
+let me = null, apps = [], users = [], config = {};
+
+function show(view){
+  $("#bootView").hidden = true;
+  $("#loginView").hidden = view !== "login";
+  $("#adminMain").hidden = view !== "main";
+  if (view === "login") { closeDrawer(); setTimeout(()=>$("#lgEmail").focus(), 50); }
+}
+
+/* ---------- login ---------- */
+$("#loginForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const err = $("#lgErr"), btn = $("#lgBtn"); err.hidden = true; btn.disabled = true; btn.textContent = "Signing in…";
+  try {
+    const r = await api("/admin/login", { method:"POST", body:{ email:$("#lgEmail").value.trim(), password:$("#lgPass").value }, noRedirect:true });
+    me = r.me; $("#lgPass").value = "";
+    await enter();
+  } catch (ex) { err.hidden = false; err.textContent = ex.message; }
+  btn.disabled = false; btn.textContent = "Sign in";
+});
+$("#logoutBtn").onclick = async () => { try { await api("/admin/logout", { method:"POST" }); } catch {} me = null; apps = []; show("login"); toast("Logged out"); };
+
+async function enter(){
+  const owner = me.role === "Owner";
+  $("#meChip").textContent = `${me.name || me.email} · ${me.role}`;
+  $("#settings").hidden = !owner; $("#usersPanel").hidden = !owner;
+  show("main");
+  await Promise.all([loadApps(), owner ? loadSettings() : null, owner ? loadUsers() : null]);
+}
+async function loadApps(){
+  try { apps = (await api("/admin/applications")).applications; renderAdmin(); }
+  catch (e) { if (e.status !== 401) toast(e.message); }
+}
+async function loadSettings(){
+  try {
+    config = await api("/settings");
+    $("#setUpi").value = config.upiId||""; $("#setPayee").value = config.payee||""; $("#setWa").value = config.whatsapp||""; $("#setBatch").value = config.batchStart||"";
+  } catch {}
+}
+async function loadUsers(){
+  try { users = (await api("/admin/users")).users; renderUsers(); } catch (e) { if (e.status !== 401) toast(e.message); }
+}
+$("#refreshBtn").onclick = () => loadApps().then(() => toast("Updated"));
+// Auto-refresh the list every 60s while the tab is visible.
+setInterval(() => { if (me && !document.hidden && $("#drawer").hidden) loadApps(); }, 60000);
+
+/* ---------- table ---------- */
+const PILL = { pending:"Pending verification", verified:"Payment verified", rejected:"Payment rejected", submitted:"Submitted", confirmed:"Admission confirmed", cancelled:"Cancelled" };
+const pill = s => `<span class="status-pill st-${s}">${PILL[s]||s}</span>`;
+const LABELS = [["fullName","Name"],["mobile","Mobile"],["whatsapp","WhatsApp"],["email","Email"],["age","Age"],["gender","Gender"],["city","City / District"],["qualification","Qualification"],["org","College / Company"],["profession","Profession"],["mode","Learning mode"],["joiningDate","Joining date",fmtDay],["why","Why AI"],["utr","Transaction / UTR"],["paymentDate","Payment date",fmtDay]];
+const cell = (d,[k,,f]) => esc((f ? f(d[k]) : d[k]) || "—");
+
+function renderAdmin(){
+  const tot=apps.length, paid=apps.filter(a=>a.paymentStatus==="verified").length, pend=apps.filter(a=>a.paymentStatus==="pending").length;
+  const on=apps.filter(a=>a.mode==="Online").length, off=apps.filter(a=>a.mode==="Offline").length;
+  $("#kpis").innerHTML = `
+    <div class="kpi"><div class="k">Total registrations</div><div class="v">${tot}</div><div class="s">₹${(paid*FEE).toLocaleString("en-IN")} verified collections</div></div>
+    <div class="kpi ok"><div class="k">Paid students</div><div class="v">${paid}</div></div>
+    <div class="kpi warn"><div class="k">Pending verification</div><div class="v">${pend}</div></div>
+    <div class="kpi"><div class="k">Online</div><div class="v">${on}</div></div>
+    <div class="kpi"><div class="k">Offline</div><div class="v">${off}</div></div>`;
+  const fj = $("#fJoin"), cur = fj.value;
+  const dates = [...new Set(apps.map(a=>a.joiningDate).filter(Boolean))].sort();
+  fj.innerHTML = `<option value="">All joining dates</option>` + dates.map(d=>`<option value="${d}">${fmtDay(d)} (${apps.filter(a=>a.joiningDate===d).length})</option>`).join("");
+  fj.value = dates.includes(cur) ? cur : "";
+  const list = filtered();
+  $("#rows").innerHTML = list.length ? list.map(a => `<tr data-id="${esc(a.id)}">
+    <td><code>${esc(a.admissionId)}</code></td>
+    <td><div class="nm">${esc(a.fullName)}</div><div class="sm">${esc(a.age)} · ${esc(a.gender)}</div></td>
+    <td><div>${esc(a.mobile)}</div><div class="sm">${esc(a.email)}</div></td>
+    <td>${esc(a.city)}</td><td>${esc(a.profession)}</td><td>${esc(a.mode)}</td>
+    <td><code>${esc(a.utr)}</code></td>
+    <td class="dt">${esc(fmtDay(a.paymentDate))}</td><td class="dt"><b>${esc(fmtDay(a.joiningDate))}</b></td>
+    <td>${pill(a.paymentStatus)}</td><td>${pill(a.admissionStatus)}</td>
+    <td class="sm dt">${fmtDate(a.createdAt)}</td></tr>`).join("")
+    : `<tr class="empty-row"><td colspan="12">${tot ? "No students match these filters." : "No registrations yet. New applications appear here as soon as students submit the form."}</td></tr>`;
+  $$("#rows tr[data-id]").forEach(tr => tr.onclick = () => openDrawer(tr.dataset.id));
+}
+function filtered(){
+  const q=$("#q").value.trim().toLowerCase(), fp=$("#fPay").value, fm=$("#fMode").value, fs=$("#fStatus").value, fj=$("#fJoin").value;
+  return apps.filter(a => (!fp||a.paymentStatus===fp) && (!fm||a.mode===fm) && (!fs||a.admissionStatus===fs) && (!fj||a.joiningDate===fj) &&
+    (!q || [a.fullName,a.mobile,a.whatsapp,a.email,a.admissionId,a.utr,a.city].join(" ").toLowerCase().includes(q)))
+    .sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
+}
+["q","fPay","fMode","fStatus","fJoin"].forEach(id => $("#"+id).addEventListener("input", renderAdmin));
+
+/* ---------- drawer ---------- */
+function closeDrawer(){ $("#drawer").hidden = true; $("#drawerBg").hidden = true; }
+$("#drawerBg").onclick = closeDrawer;
+addEventListener("keydown", e => { if (e.key==="Escape") closeDrawer(); });
+function openDrawer(id){
+  const a = apps.find(x => x.id === id); if (!a) return;
+  const dr = $("#drawer");
+  const confirmMsg = `Hi ${a.fullName}, your admission to TECHLY AI × SI Master Class is confirmed. Admission ID: ${a.admissionId}. Payment of ₹999 (UTR ${a.utr}, paid ${fmtDay(a.paymentDate)}) verified. Your joining date is ${fmtDay(a.joiningDate)}. – TECHLY`;
+  const shot = a.hasScreenshot ? `/api/admin/applications/${encodeURIComponent(a.id)}/screenshot` : "";
+  dr.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+      <div><code style="font:700 14px var(--mono);color:var(--blue)">${esc(a.admissionId)}</code><h3 style="margin-top:6px">${esc(a.fullName)}</h3></div>
+      <button class="btn btn-ghost btn-sm" id="dClose" type="button">Close</button>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">${pill(a.paymentStatus)}${pill(a.admissionStatus)}</div>
+    <dl class="review">${LABELS.map(L=>`<dt>${L[1]}</dt><dd>${cell(a,L)}</dd>`).join("")}<dt>Applied</dt><dd>${fmtDate(a.createdAt)}</dd>${a.verifiedAt?`<dt>Verified</dt><dd>${fmtDate(a.verifiedAt)}${a.verifiedBy?` by ${esc(a.verifiedBy)}`:""}</dd>`:""}</dl>
+    <div class="shot">${shot?`<p style="font-weight:700;font-size:13px;margin-bottom:8px">Payment screenshot</p><a href="${shot}" target="_blank" rel="noopener"><img src="${shot}" alt="Payment screenshot from ${esc(a.fullName)}"></a>`:`<p style="color:var(--dim);font-size:13px">No screenshot attached.</p>`}</div>
+    <p class="eyebrow" style="margin-top:22px">Payment verification</p>
+    <div class="act-grid">
+      <button class="btn btn-ok btn-sm" data-act="verify" type="button">Verify payment &amp; confirm</button>
+      <button class="btn btn-bad btn-sm" data-act="reject" type="button">Reject payment</button>
+    </div>
+    <p class="eyebrow" style="margin-top:20px">Payment date</p>
+    <div class="join-edit"><input type="date" id="dPay" max="${TODAY}" value="${esc(a.paymentDate||"")}"><button class="btn btn-ghost btn-sm" id="dPaySave" type="button">Update</button></div>
+    <p class="eyebrow" style="margin-top:20px">Joining date</p>
+    <div class="join-edit"><input type="date" id="dJoin" value="${esc(a.joiningDate||"")}"><button class="btn btn-ghost btn-sm" id="dJoinSave" type="button">Update</button></div>
+    <p class="eyebrow" style="margin-top:20px">Admission status</p>
+    <div class="seg" style="margin-top:10px">${["submitted","confirmed","cancelled"].map(s=>`<label><input type="radio" name="adm" value="${s}" ${a.admissionStatus===s?"checked":""}><span>${PILL[s]}</span></label>`).join("")}</div>
+    <p class="eyebrow" style="margin-top:22px">Notify student</p>
+    <div class="act-grid">
+      <a class="btn btn-primary btn-sm" target="_blank" rel="noopener" href="https://wa.me/91${esc(a.whatsapp)}?text=${encodeURIComponent(confirmMsg)}">WhatsApp confirmation</a>
+      <button class="btn btn-ghost btn-sm" id="copyMail" type="button">Copy email message</button>
+    </div>
+    <p style="font-size:12px;color:var(--dim);margin-top:8px">Email: ${esc(a.email)}</p>`;
+  dr.hidden = false; $("#drawerBg").hidden = false;
+  $("#dClose").onclick = closeDrawer;
+  $("#copyMail").onclick = () => copy(`To: ${a.email}\nSubject: Admission confirmed – TECHLY AI × SI Master Class (${a.admissionId})\n\n${confirmMsg}`);
+  const upd = async (patch, msg) => {
+    try {
+      const r = await api(`/admin/applications/${encodeURIComponent(a.id)}`, { method:"PATCH", body:patch });
+      const i = apps.findIndex(x => x.id === a.id); if (i >= 0) apps[i] = r.application;
+      renderAdmin(); openDrawer(a.id); toast(msg);
+    } catch (e) { if (e.status !== 401) toast(e.message || "Couldn't update. Try again."); }
+  };
+  dr.querySelector('[data-act="verify"]').onclick = () => upd({paymentStatus:"verified", admissionStatus:"confirmed"}, "Payment verified, admission confirmed");
+  dr.querySelector('[data-act="reject"]').onclick = () => upd({paymentStatus:"rejected"}, "Payment marked rejected");
+  $("#dPaySave").onclick = () => { const v=$("#dPay").value; if(!v){ toast("Pick a payment date"); return; } upd({paymentDate:v}, "Payment date updated to " + fmtDay(v)); };
+  $("#dJoinSave").onclick = () => { const v=$("#dJoin").value; if(!v){ toast("Pick a joining date"); return; } upd({joiningDate:v}, "Joining date updated to " + fmtDay(v)); };
+  dr.querySelectorAll('input[name="adm"]').forEach(r => r.onchange = () => upd({admissionStatus:r.value}, "Admission status updated"));
+}
+
+/* ---------- Excel ---------- */
+async function loadXLSX(){
+  if (window.XLSX) return window.XLSX;
+  await new Promise((res,rej) => { const s=document.createElement("script"); s.src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"; s.onload=res; s.onerror=rej; document.head.appendChild(s); });
+  return window.XLSX;
+}
+$("#exportBtn").onclick = async () => {
+  const list = filtered();
+  if (!list.length) { toast("No students to export"); return; }
+  try {
+    const X = await loadXLSX();
+    const rows = list.map(a => ({"Admission ID":a.admissionId,"Full Name":a.fullName,"Mobile":a.mobile,"WhatsApp":a.whatsapp,"Email":a.email,"Age":a.age,"Gender":a.gender,"City / District":a.city,"Qualification":a.qualification,"College / Company":a.org,"Profession":a.profession,"Learning Mode":a.mode,"Joining Date":fmtDay(a.joiningDate),"Why AI":a.why,"Fee (₹)":FEE,"UTR / Transaction ID":a.utr,"Payment Date":fmtDay(a.paymentDate),"Payment Status":PILL[a.paymentStatus],"Admission Status":PILL[a.admissionStatus],"Verified By":a.verifiedBy||"","Applied On":fmtDate(a.createdAt)}));
+    const ws = X.utils.json_to_sheet(rows); ws["!cols"] = Object.keys(rows[0]).map(k=>({wch:Math.max(13,k.length+2)}));
+    const wb = X.utils.book_new(); X.utils.book_append_sheet(wb, ws, "Students");
+    X.writeFile(wb, `TECHLY-AIxSI-students-${TODAY}.xlsx`);
+  } catch { toast("Couldn't create the Excel file"); }
+};
+
+/* ---------- settings ---------- */
+$("#setWa").addEventListener("input", e => e.target.value = e.target.value.replace(/\D/g,"").slice(0,10));
+$("#saveSettings").onclick = async () => {
+  const c = { upiId:$("#setUpi").value.trim(), payee:$("#setPayee").value.trim(), whatsapp:$("#setWa").value.trim(), batchStart:$("#setBatch").value };
+  if (c.whatsapp && !phoneOk(c.whatsapp)) { toast("Enter a valid 10-digit WhatsApp number"); return; }
+  try { config = await api("/admin/settings", { method:"PUT", body:c }); toast("Settings saved"); }
+  catch (e) { if (e.status !== 401) toast(e.message); }
+};
+
+/* ---------- users ---------- */
+function renderUsers(){
+  const owners = users.filter(u => u.role === "Owner" && u.active);
+  $("#userRows").innerHTML = users.map(u => {
+    const self = u.id === me.id, lastOwner = u.role==="Owner" && u.active && owners.length<=1;
+    const locked = self || lastOwner;
+    return `<tr data-u="${esc(u.id)}">
+      <td><b>${esc(u.name || u.email)}</b>${self?' <span class="sm">(you)</span>':''}<div class="sm">${esc(u.email)}</div></td>
+      <td><span class="role-badge ${u.role==="Owner"?"":"admin"}">${esc(u.role)}</span></td>
+      <td>${u.active ? '<span class="status-pill st-verified">Active</span>' : '<span class="status-pill st-cancelled">Disabled</span>'}</td>
+      <td class="sm dt">${u.lastLogin?fmtDate(u.lastLogin):"Never"}</td>
+      <td><div class="acts">
+        <input type="password" placeholder="New password" data-pw autocomplete="new-password"><button class="btn btn-ghost btn-sm" data-act="reset" type="button">Reset</button>
+        ${locked?"":`<button class="btn btn-ghost btn-sm" data-act="toggle" type="button">${u.active?"Disable":"Enable"}</button>`}
+        ${locked?"":`<button class="btn btn-ghost btn-sm" data-act="role" type="button">Make ${u.role==="Owner"?"Admin":"Owner"}</button>`}
+        ${locked?"":`<button class="btn btn-bad btn-sm" data-act="del" type="button">Remove</button>`}
+      </div></td></tr>`; }).join("");
+  $$("#userRows tr").forEach(tr => {
+    const id = tr.dataset.u, u = users.find(x=>x.id===id);
+    tr.querySelectorAll("[data-act]").forEach(b => b.onclick = async () => {
+      const path = `/admin/users/${encodeURIComponent(id)}`;
+      try {
+        if (b.dataset.act === "reset") {
+          const pw = tr.querySelector("[data-pw]").value;
+          if (pw.length < 8) { toast("New password needs at least 8 characters"); return; }
+          await api(path, { method:"PATCH", body:{ password:pw } }); toast(`Password reset for ${u.name || u.email}`);
+        } else if (b.dataset.act === "toggle") { await api(path, { method:"PATCH", body:{ active:!u.active } }); toast(u.active?"User disabled":"User enabled"); }
+        else if (b.dataset.act === "role") { await api(path, { method:"PATCH", body:{ role:u.role==="Owner"?"Admin":"Owner" } }); toast("Role updated"); }
+        else if (b.dataset.act === "del") {
+          if (b.dataset.armed !== "1") { b.dataset.armed = "1"; b.textContent = "Confirm remove"; setTimeout(()=>{ b.dataset.armed=""; b.textContent="Remove"; }, 4000); return; }
+          await api(path, { method:"DELETE" }); toast(`${u.name || u.email} removed`);
+        }
+        loadUsers();
+      } catch (e) { if (e.status !== 401) toast(e.message); }
+    });
+  });
+}
+$("#nuAdd").onclick = async () => {
+  const body = { email:$("#nuEmail").value.trim(), name:$("#nuName").value.trim(), role:$("#nuRole").value, password:$("#nuPass").value };
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(body.email)) { toast("Enter a valid email"); return; }
+  if (body.password.length < 8) { toast("Password needs at least 8 characters"); return; }
+  try { await api("/admin/users", { method:"POST", body }); $("#nuEmail").value=""; $("#nuName").value=""; $("#nuPass").value=""; toast(`${body.name || body.email} added`); loadUsers(); }
+  catch (e) { if (e.status !== 401) toast(e.message); }
+};
+$("#cpSave").onclick = async () => {
+  const nw = $("#cpNew").value; if (nw.length < 8) { toast("New password needs at least 8 characters"); return; }
+  try { await api("/admin/me/password", { method:"POST", body:{ current:$("#cpOld").value, next:nw } }); $("#cpOld").value=""; $("#cpNew").value=""; toast("Password updated"); }
+  catch (e) { if (e.status !== 401) toast(e.message); }
+};
+
+/* ---------- boot ---------- */
+(async () => {
+  try { me = (await api("/admin/me", { noRedirect:true })).me; await enter(); }
+  catch { show("login"); }
+})();
+})();
+</script>
+</body>
+</html>
